@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Herramienta web para resolver el método de asignación, el algoritmo de Johnson y diseñar grafos dirigidos con pesos.">
+<meta name="theme-color" content="#111111">
+<title>GrafoLab · Grafos y Matrices</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300..800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,300..600,0..1,0&display=block" rel="stylesheet">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<header class="barra">
+  <a class="marca" href="#inicio" data-ir="inicio">
+    <span class="logo"><span class="material-symbols-rounded">hub</span></span>
+    <span>GrafoLab</span>
+  </a>
+  <nav class="nav">
+    <a href="#inicio" data-ir="inicio" data-ruta="inicio"><span class="material-symbols-rounded">home</span><span>Inicio</span></a>
+    <a href="#matrices" data-ir="matrices" data-ruta="matrices"><span class="material-symbols-rounded">grid_on</span><span>Matrices</span></a>
+    <a href="#grafos" data-ir="grafos" data-ruta="grafos"><span class="material-symbols-rounded">share</span><span>Grafos</span></a>
+  </nav>
+</header>
+
+<main>
+
+  <section id="v-inicio" class="vista">
+    <div class="hero">
+      <div class="hero-texto">
+        <span class="eyebrow"><span class="material-symbols-rounded">school</span>Análisis de Algoritmos · UCB</span>
+        <h1>Grafos y matrices, resueltos paso a paso.</h1>
+        <p>Una herramienta web para diseñar grafos dirigidos con pesos, obtener su matriz de adyacencia y resolver problemas con el método de asignación y el algoritmo de Johnson, desde la computadora o el celular.</p>
+        <div class="hero-acciones">
+          <a class="btn claro grande" href="#matrices" data-ir="matrices"><span class="material-symbols-rounded">grid_on</span>Abrir Matrices</a>
+          <a class="btn fantasma grande" href="#grafos" data-ir="grafos"><span class="material-symbols-rounded">hub</span>Abrir Grafos</a>
+        </div>
+      </div>
+      <svg class="hero-grafo" viewBox="0 0 320 260" aria-hidden="true">
+        <g stroke="rgba(255,255,255,.5)" stroke-width="2" fill="none" stroke-linecap="round">
+          <path d="M70 70 L240 50"/>
+          <path d="M70 70 L120 190"/>
+          <path d="M240 50 L260 170"/>
+          <path d="M120 190 L260 170"/>
+          <path d="M240 50 Q160 110 120 190"/>
+          <path d="M58 54 C38 4 102 4 82 54"/>
+        </g>
+        <g fill="#111" stroke="#fff" stroke-width="2.5">
+          <circle cx="70" cy="70" r="20"/>
+          <circle cx="240" cy="50" r="20"/>
+          <circle cx="120" cy="190" r="20"/>
+          <circle cx="260" cy="170" r="20"/>
+        </g>
+        <g fill="#fff" font-family="Roboto Flex, Arial, sans-serif" font-weight="700" font-size="15" text-anchor="middle">
+          <text x="70" y="75">A</text>
+          <text x="240" y="55">B</text>
+          <text x="120" y="195">C</text>
+          <text x="260" y="175">D</text>
+        </g>
+      </svg>
+    </div>
+
+    <h2 class="titulo-seccion">¿Qué puedes hacer?</h2>
+    <div class="rejilla-tarjetas">
+      <article class="funcion">
+        <div class="icono"><span class="material-symbols-rounded">assignment_ind</span></div>
+        <h3>Método de asignación</h3>
+        <p>Resuelve problemas de asignación con el método húngaro, para minimizar costos o maximizar beneficios, mostrando cada reducción y cada cobertura de ceros.</p>
+      </article>
+      <article class="funcion">
+        <div class="icono"><span class="material-symbols-rounded">route</span></div>
+        <h3>Algoritmo de Johnson</h3>
+        <p>Calcula tiempos tempranos, tiempos tardíos, holguras y la ruta crítica de una red, con la explicación de cada cálculo.</p>
+      </article>
+      <article class="funcion">
+        <div class="icono"><span class="material-symbols-rounded">hub</span></div>
+        <h3>Editor de grafos</h3>
+        <p>Crea nodos, conéctalos con pesos, haz conexiones de ida y vuelta o bucles sobre el mismo nodo, y muévelos con el dedo o el mouse.</p>
+      </article>
+      <article class="funcion">
+        <div class="icono"><span class="material-symbols-rounded">table_chart</span></div>
+        <h3>Matriz de adyacencia</h3>
+        <p>Genera la matriz con pesos o binaria, con sumas por fila y columna, y la cardinalidad de cada nodo: cuántas conexiones entran y cuántas salen.</p>
+      </article>
+      <article class="funcion">
+        <div class="icono"><span class="material-symbols-rounded">sync_alt</span></div>
+        <h3>Matriz ⇄ Grafo</h3>
+        <p>Convierte una matriz en grafo y un grafo en matriz. La solución de cada algoritmo se resalta directamente sobre el grafo.</p>
+      </article>
+      <article class="funcion">
+        <div class="icono"><span class="material-symbols-rounded">save</span></div>
+        <h3>Guarda tu trabajo</h3>
+        <p>Descarga lo que hagas como archivo .json y ábrelo después en cualquier modo. También puedes exportar el grafo como imagen PNG.</p>
+      </article>
+    </div>
+
+    <h2 class="titulo-seccion">Cómo funciona</h2>
+    <div class="pasos-inicio">
+      <div class="paso-inicio">
+        <span class="numero">1</span>
+        <div>
+          <h3>Elige un modo</h3>
+          <p>Matrices para resolver con un algoritmo, o Grafos para dibujar tu red.</p>
+        </div>
+      </div>
+      <div class="paso-inicio">
+        <span class="numero">2</span>
+        <div>
+          <h3>Ingresa tus datos</h3>
+          <p>Escribe la matriz (también puedes pegarla desde Excel) o dibuja nodos y conexiones.</p>
+        </div>
+      </div>
+      <div class="paso-inicio">
+        <span class="numero">3</span>
+        <div>
+          <h3>Resuelve y guarda</h3>
+          <p>Revisa el paso a paso, pásalo al otro modo para verlo distinto y descarga tu archivo.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="titulo-seccion">Equipo</h2>
+    <div class="equipo">
+      <article class="miembro">
+        <div class="foto"><span>IR</span><img src="img/equipo/ignacio-rios.jpg" alt="Ignacio Rios" onerror="this.remove()"></div>
+        <h3>Ignacio Rios</h3>
+        <p>Integrante</p>
+      </article>
+      <article class="miembro">
+        <div class="foto"><span>CZ</span><img src="img/equipo/camilo-zurita.jpg" alt="Camilo Zurita" onerror="this.remove()"></div>
+        <h3>Camilo Zurita</h3>
+        <p>Integrante</p>
+      </article>
+      <article class="miembro">
+        <div class="foto"><span>IS</span><img src="img/equipo/ignacio-sanga.jpg" alt="Ignacio Sanga" onerror="this.remove()"></div>
+        <h3>Ignacio Sanga</h3>
+        <p>Integrante</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="v-matrices" class="vista">
+    <div class="encabezado-vista">
+      <h1>Matrices</h1>
+      <p>Ingresa los valores y resuelve con el método de asignación o con el algoritmo de Johnson.</p>
+    </div>
+
+    <div class="tarjeta">
+      <div class="fila-controles">
+        <div class="segmentado" id="m-algoritmo">
+          <button type="button" data-valor="asignacion"><span class="material-symbols-rounded">assignment_ind</span>Asignación</button>
+          <button type="button" data-valor="johnson"><span class="material-symbols-rounded">route</span>Johnson</button>
+        </div>
+        <div class="segmentado" id="m-objetivo">
+          <button type="button" data-valor="min"><span class="material-symbols-rounded">south</span>Minimizar</button>
+          <button type="button" data-valor="max"><span class="material-symbols-rounded">north</span>Maximizar</button>
+        </div>
+      </div>
+      <div class="fila-controles">
+        <label class="campo compacto"><span id="m-etq-filas">Filas</span><input type="number" id="m-filas" min="1" max="20" inputmode="numeric"></label>
+        <label class="campo compacto" id="m-caja-columnas"><span>Columnas</span><input type="number" id="m-columnas" min="1" max="20" inputmode="numeric"></label>
+        <button type="button" class="btn tonal" id="m-aplicar-tam"><span class="material-symbols-rounded">aspect_ratio</span>Aplicar tamaño</button>
+        <button type="button" class="btn tonal" id="m-aleatoria"><span class="material-symbols-rounded">casino</span>Aleatoria</button>
+        <button type="button" class="btn tonal" id="m-limpiar"><span class="material-symbols-rounded">backspace</span>Limpiar</button>
+      </div>
+      <p class="ayuda" id="m-ayuda"></p>
+    </div>
+
+    <div class="tarjeta">
+      <div class="tabla-scroll"><table class="matriz" id="m-tabla"></table></div>
+      <div class="acciones">
+        <button type="button" class="btn lleno" id="m-resolver"><span class="material-symbols-rounded">play_arrow</span>Resolver</button>
+        <button type="button" class="btn contorno" id="m-a-grafo"><span class="material-symbols-rounded">hub</span>Ver como grafo</button>
+        <span class="espacio"></span>
+        <button type="button" class="btn contorno" id="m-guardar"><span class="material-symbols-rounded">download</span>Guardar</button>
+        <button type="button" class="btn contorno" id="m-abrir"><span class="material-symbols-rounded">folder_open</span>Abrir</button>
+      </div>
+    </div>
+
+    <div id="m-resultado"></div>
+  </section>
+
+  <section id="v-grafos" class="vista">
+    <div class="encabezado-vista">
+      <h1>Grafos</h1>
+      <p>Diseña un grafo dirigido con pesos, bucles y cardinalidad, y genera su matriz de adyacencia.</p>
+    </div>
+
+    <div class="tarjeta">
+      <div class="barra-herramientas" id="g-herramientas">
+        <button type="button" class="herr" data-herr="mover"><span class="material-symbols-rounded">open_with</span><span>Mover</span></button>
+        <button type="button" class="herr" data-herr="nodo"><span class="material-symbols-rounded">add_circle</span><span>Nodo</span></button>
+        <button type="button" class="herr" data-herr="conectar"><span class="material-symbols-rounded">arrow_right_alt</span><span>Conectar</span></button>
+        <button type="button" class="herr" data-herr="editar"><span class="material-symbols-rounded">edit</span><span>Editar</span></button>
+        <button type="button" class="herr" data-herr="borrar"><span class="material-symbols-rounded">delete</span><span>Borrar</span></button>
+      </div>
+      <p class="ayuda" id="g-ayuda"></p>
+      <div class="lienzo" id="g-lienzo">
+        <svg id="g-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <marker id="g-flecha" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0.8 L10 5 L0 9.2 Z" fill="#2b2b2b"/></marker>
+            <marker id="g-flecha-negra" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0.8 L10 5 L0 9.2 Z" fill="#000000"/></marker>
+            <marker id="g-flecha-gris" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0.8 L10 5 L0 9.2 Z" fill="#c4c4c4"/></marker>
+            <filter id="g-sombra" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.2"/></filter>
+          </defs>
+          <g id="g-capa"></g>
+        </svg>
+      </div>
+      <div class="acciones">
+        <button type="button" class="btn tonal" id="g-organizar"><span class="material-symbols-rounded">auto_awesome_mosaic</span>Organizar</button>
+        <button type="button" class="btn tonal" id="g-limpiar"><span class="material-symbols-rounded">delete_sweep</span>Limpiar</button>
+        <button type="button" class="btn tonal" id="g-quitar" hidden><span class="material-symbols-rounded">format_color_reset</span>Quitar resaltado</button>
+        <label class="check"><input type="checkbox" id="g-card" checked><span>Cardinalidad en nodos</span></label>
+        <span class="espacio"></span>
+        <button type="button" class="btn contorno" id="g-a-matriz"><span class="material-symbols-rounded">grid_on</span>Enviar a Matrices</button>
+        <button type="button" class="btn contorno" id="g-png"><span class="material-symbols-rounded">image</span>PNG</button>
+        <button type="button" class="btn contorno" id="g-guardar"><span class="material-symbols-rounded">download</span>Guardar</button>
+        <button type="button" class="btn contorno" id="g-abrir"><span class="material-symbols-rounded">folder_open</span>Abrir</button>
+      </div>
+    </div>
+
+    <div class="rejilla-2">
+      <div class="tarjeta" id="g-tarjeta-matriz">
+        <div class="titulo-tarjeta">
+          <h2>Matriz de adyacencia</h2>
+          <div class="segmentado chico" id="g-modo-matriz">
+            <button type="button" data-valor="pesos" class="activo">Pesos</button>
+            <button type="button" data-valor="binaria">Binaria</button>
+          </div>
+        </div>
+        <p class="ayuda">Fila = origen, columna = destino. Puedes editar los pesos aquí y aplicarlos al grafo; celda vacía = sin conexión.</p>
+        <div class="tabla-scroll"><table class="matriz" id="g-matriz"></table></div>
+        <div class="acciones">
+          <button type="button" class="btn lleno" id="g-aplicar"><span class="material-symbols-rounded">done</span>Aplicar matriz al grafo</button>
+          <button type="button" class="btn tonal" id="g-nuevo-matriz"><span class="material-symbols-rounded">add</span>Nuevo desde matriz</button>
+        </div>
+      </div>
+      <div class="tarjeta">
+        <div class="titulo-tarjeta"><h2>Cardinalidad</h2></div>
+        <p class="ayuda">Entradas: conexiones que llegan al nodo. Salidas: conexiones que salen de él. Un bucle cuenta como entrada y como salida.</p>
+        <div class="tabla-scroll"><table class="datos" id="g-cardinalidad"></table></div>
+        <div class="chips" id="g-resumen"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="pie">
+  <p>GrafoLab · Ignacio Rios, Camilo Zurita e Ignacio Sanga · <span id="anio"></span></p>
+</footer>
+
+<div class="dialogo-fondo" id="dialogo" hidden>
+  <form class="dialogo" id="dialogo-form" autocomplete="off">
+    <h3 id="dialogo-titulo"></h3>
+    <p id="dialogo-texto"></p>
+    <div class="dialogo-campos" id="dialogo-campos"></div>
+    <div class="dialogo-acciones">
+      <button type="button" class="btn texto" id="dialogo-cancelar">Cancelar</button>
+      <button type="submit" class="btn lleno" id="dialogo-aceptar">Aceptar</button>
+    </div>
+  </form>
+</div>
+
+<div id="snackbar" role="status"></div>
+
+<script src="js/utilidades.js"></script>
+<script src="js/algoritmos.js"></script>
+<script src="js/matrices.js"></script>
+<script src="js/grafos.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
