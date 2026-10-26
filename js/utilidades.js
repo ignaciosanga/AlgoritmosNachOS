@@ -21,6 +21,18 @@ const U = {
     return Number.isFinite(n) ? n : NaN;
   },
 
+  marcar(cont, valor) {
+    cont.querySelectorAll('button[data-valor]').forEach(b => b.classList.toggle('activo', b.dataset.valor === valor));
+  },
+
+  leerCelda(v, permitirM) {
+    const t = String(v ?? '').trim();
+    if (t === '' || t === '-' || t === '—') return { v: null };
+    if (permitirM && /^(m|x|∞|inf)$/i.test(t)) return { v: Infinity };
+    const n = U.num(t);
+    return Number.isNaN(n) ? { malo: true } : { v: n };
+  },
+
   nombreArchivo(s, porDefecto) {
     const t = String(s || '').trim().replace(/\.(json|png)$/i, '').replace(/[\\/:*?"<>|]+/g, '-');
     return t || porDefecto;
@@ -128,4 +140,4 @@ const U = {
       fondo.onpointerdown = e => { if (e.target === fondo) cerrar(null); };
     });
   }
-};
+};

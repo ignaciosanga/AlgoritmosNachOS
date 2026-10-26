@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Herramienta web para resolver el método de asignación, el algoritmo de Johnson y diseñar grafos dirigidos con pesos.">
+<meta name="description" content="Aprende qué es un algoritmo, dibuja grafos y resuelve el método de asignación y el algoritmo de Johnson paso a paso.">
 <meta name="theme-color" content="#111111">
-<title>GrafoLab · Grafos y Matrices</title>
+<title>GrafoLab · Grafos y Algoritmos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,300..800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,6 +14,12 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <marker id="ilus-flecha" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0.8 L10 5 L0 9.2 Z" fill="#111111"/></marker>
+  </defs>
+</svg>
+
 <header class="barra">
   <a class="marca" href="#inicio" data-ir="inicio">
     <span class="logo"><span class="material-symbols-rounded">hub</span></span>
@@ -21,8 +27,10 @@
   </a>
   <nav class="nav">
     <a href="#inicio" data-ir="inicio" data-ruta="inicio"><span class="material-symbols-rounded">home</span><span>Inicio</span></a>
-    <a href="#matrices" data-ir="matrices" data-ruta="matrices"><span class="material-symbols-rounded">grid_on</span><span>Matrices</span></a>
+    <a href="#introduccion" data-ir="introduccion" data-ruta="introduccion"><span class="material-symbols-rounded">school</span><span class="largo">Introducción</span><span class="corto">Intro</span></a>
     <a href="#grafos" data-ir="grafos" data-ruta="grafos"><span class="material-symbols-rounded">share</span><span>Grafos</span></a>
+    <a href="#asignacion" data-ir="asignacion" data-ruta="asignacion"><span class="material-symbols-rounded">assignment_ind</span><span>Asignación</span></a>
+    <a href="#johnson" data-ir="johnson" data-ruta="johnson"><span class="material-symbols-rounded">route</span><span>Johnson</span></a>
   </nav>
 </header>
 
@@ -32,11 +40,11 @@
     <div class="hero">
       <div class="hero-texto">
         <span class="eyebrow"><span class="material-symbols-rounded">school</span>Análisis de Algoritmos · UCB</span>
-        <h1>Grafos y matrices, resueltos paso a paso.</h1>
-        <p>Una herramienta web para diseñar grafos dirigidos con pesos, obtener su matriz de adyacencia y resolver problemas con el método de asignación y el algoritmo de Johnson, desde la computadora o el celular.</p>
+        <h1>Grafos y algoritmos, explicados desde cero.</h1>
+        <p>Una página para aprender y practicar: qué es un algoritmo, cómo se dibuja un grafo y cómo se resuelven problemas de asignación y de planificación con el algoritmo de Johnson, paso a paso, desde la computadora o el celular.</p>
         <div class="hero-acciones">
-          <a class="btn claro grande" href="#matrices" data-ir="matrices"><span class="material-symbols-rounded">grid_on</span>Abrir Matrices</a>
-          <a class="btn fantasma grande" href="#grafos" data-ir="grafos"><span class="material-symbols-rounded">hub</span>Abrir Grafos</a>
+          <a class="btn claro grande" href="#introduccion" data-ir="introduccion"><span class="material-symbols-rounded">school</span>Empezar por la introducción</a>
+          <a class="btn fantasma grande" href="#grafos" data-ir="grafos"><span class="material-symbols-rounded">hub</span>Ir a Grafos</a>
         </div>
       </div>
       <svg class="hero-grafo" viewBox="0 0 320 260" aria-hidden="true">
@@ -63,61 +71,65 @@
       </svg>
     </div>
 
-    <h2 class="titulo-seccion">¿Qué puedes hacer?</h2>
+    <h2 class="titulo-seccion">¿Qué encontrarás?</h2>
     <div class="rejilla-tarjetas">
-      <article class="funcion">
-        <div class="icono"><span class="material-symbols-rounded">assignment_ind</span></div>
-        <h3>Método de asignación</h3>
-        <p>Resuelve problemas de asignación con el método húngaro, para minimizar costos o maximizar beneficios, mostrando cada reducción y cada cobertura de ceros.</p>
-      </article>
-      <article class="funcion">
-        <div class="icono"><span class="material-symbols-rounded">route</span></div>
-        <h3>Algoritmo de Johnson</h3>
-        <p>Calcula tiempos tempranos, tiempos tardíos, holguras y la ruta crítica de una red, con la explicación de cada cálculo.</p>
-      </article>
-      <article class="funcion">
+      <a class="funcion enlace" href="#introduccion" data-ir="introduccion">
+        <div class="icono"><span class="material-symbols-rounded">school</span></div>
+        <h3>Introducción</h3>
+        <p>Qué es un algoritmo, para qué sirve, sus características y cómo se mide su complejidad, con ejemplos interactivos y videos.</p>
+        <span class="ir">Abrir <span class="material-symbols-rounded">arrow_forward</span></span>
+      </a>
+      <a class="funcion enlace" href="#grafos" data-ir="grafos">
         <div class="icono"><span class="material-symbols-rounded">hub</span></div>
-        <h3>Editor de grafos</h3>
-        <p>Crea nodos, conéctalos con pesos, haz conexiones de ida y vuelta o bucles sobre el mismo nodo, y muévelos con el dedo o el mouse.</p>
-      </article>
-      <article class="funcion">
-        <div class="icono"><span class="material-symbols-rounded">table_chart</span></div>
-        <h3>Matriz de adyacencia</h3>
-        <p>Genera la matriz con pesos o binaria, con sumas por fila y columna, y la cardinalidad de cada nodo: cuántas conexiones entran y cuántas salen.</p>
-      </article>
+        <h3>Grafos</h3>
+        <p>Dibuja nodos y conexiones con pesos, bucles e ida y vuelta, y mira su matriz de adyacencia y cuántas conexiones entran y salen de cada nodo.</p>
+        <span class="ir">Abrir <span class="material-symbols-rounded">arrow_forward</span></span>
+      </a>
+      <a class="funcion enlace" href="#asignacion" data-ir="asignacion">
+        <div class="icono"><span class="material-symbols-rounded">assignment_ind</span></div>
+        <h3>Asignación</h3>
+        <p>Reparte tareas al menor costo o al mayor beneficio con el método húngaro. Quita filas y columnas vacías y agrega ficticias cuando hacen falta.</p>
+        <span class="ir">Abrir <span class="material-symbols-rounded">arrow_forward</span></span>
+      </a>
+      <a class="funcion enlace" href="#johnson" data-ir="johnson">
+        <div class="icono"><span class="material-symbols-rounded">route</span></div>
+        <h3>Johnson</h3>
+        <p>Planifica un proyecto: calcula los tiempos más tempranos y más tardíos de cada evento, las holguras y la ruta crítica.</p>
+        <span class="ir">Abrir <span class="material-symbols-rounded">arrow_forward</span></span>
+      </a>
       <article class="funcion">
         <div class="icono"><span class="material-symbols-rounded">sync_alt</span></div>
         <h3>Matriz ⇄ Grafo</h3>
-        <p>Convierte una matriz en grafo y un grafo en matriz. La solución de cada algoritmo se resalta directamente sobre el grafo.</p>
+        <p>Cada problema se puede trabajar como tabla o como dibujo. Al pasar de uno a otro, la matriz se adapta a las conexiones que existen, sin celdas vacías de más.</p>
       </article>
       <article class="funcion">
         <div class="icono"><span class="material-symbols-rounded">save</span></div>
         <h3>Guarda tu trabajo</h3>
-        <p>Descarga lo que hagas como archivo .json y ábrelo después en cualquier modo. También puedes exportar el grafo como imagen PNG.</p>
+        <p>Descarga lo que hagas como archivo .json para abrirlo después, o exporta tu grafo como imagen PNG.</p>
       </article>
     </div>
 
-    <h2 class="titulo-seccion">Cómo funciona</h2>
+    <h2 class="titulo-seccion">Cómo usar la página</h2>
     <div class="pasos-inicio">
       <div class="paso-inicio">
         <span class="numero">1</span>
         <div>
-          <h3>Elige un modo</h3>
-          <p>Matrices para resolver con un algoritmo, o Grafos para dibujar tu red.</p>
+          <h3>Aprende lo básico</h3>
+          <p>Si es tu primera vez, lee la introducción: toma unos minutos y tiene ejemplos que puedes tocar.</p>
         </div>
       </div>
       <div class="paso-inicio">
         <span class="numero">2</span>
         <div>
-          <h3>Ingresa tus datos</h3>
-          <p>Escribe la matriz (también puedes pegarla desde Excel) o dibuja nodos y conexiones.</p>
+          <h3>Elige una pantalla</h3>
+          <p>Cada pantalla empieza con una explicación corta del tema y trae un ejemplo listo para probar.</p>
         </div>
       </div>
       <div class="paso-inicio">
         <span class="numero">3</span>
         <div>
-          <h3>Resuelve y guarda</h3>
-          <p>Revisa el paso a paso, pásalo al otro modo para verlo distinto y descarga tu archivo.</p>
+          <h3>Resuelve y revisa</h3>
+          <p>Presiona «Resolver» y lee el paso a paso: cada cálculo viene explicado en palabras.</p>
         </div>
       </div>
     </div>
@@ -142,80 +154,264 @@
     </div>
   </section>
 
-  <section id="v-matrices" class="vista">
+  <section id="v-introduccion" class="vista">
     <div class="encabezado-vista">
-      <h1>Matrices</h1>
-      <p>Ingresa los valores y resuelve con el método de asignación o con el algoritmo de Johnson.</p>
+      <h1>Introducción</h1>
+      <p>Si es tu primera vez con estos temas, empieza aquí. En unos minutos sabrás qué es un algoritmo, para qué sirve y cómo se mide si es rápido o lento.</p>
     </div>
 
-    <div class="tarjeta">
-      <div class="fila-controles">
-        <div class="segmentado" id="m-algoritmo">
-          <button type="button" data-valor="asignacion"><span class="material-symbols-rounded">assignment_ind</span>Asignación</button>
-          <button type="button" data-valor="johnson"><span class="material-symbols-rounded">route</span>Johnson</button>
+    <div class="indice">
+      <button type="button" class="chip boton" data-scroll="i-que-es"><span class="material-symbols-rounded">help</span>¿Qué es?</button>
+      <button type="button" class="chip boton" data-scroll="i-usos"><span class="material-symbols-rounded">apps</span>Usos</button>
+      <button type="button" class="chip boton" data-scroll="i-caracteristicas"><span class="material-symbols-rounded">checklist</span>Características</button>
+      <button type="button" class="chip boton" data-scroll="i-complejidad"><span class="material-symbols-rounded">speed</span>Complejidad</button>
+      <button type="button" class="chip boton" data-scroll="i-videos"><span class="material-symbols-rounded">smart_display</span>Videos</button>
+    </div>
+
+    <div class="tarjeta" id="i-que-es">
+      <span class="sobretitulo">1 · Concepto</span>
+      <h2>¿Qué es un algoritmo?</h2>
+      <p class="lead">Un <b>algoritmo</b> es una lista finita de pasos, en un orden fijo y sin ambigüedad, que toma unos datos de <b>entrada</b> y los convierte en un <b>resultado</b>. Es como una receta de cocina: los ingredientes son la entrada, los pasos son las instrucciones y el plato terminado es la salida.</p>
+      <div class="flujo">
+        <div class="flujo-caja"><span class="material-symbols-rounded">login</span><b>Entrada</b><small>Ingredientes · una lista de números</small></div>
+        <span class="material-symbols-rounded flujo-flecha">arrow_forward</span>
+        <div class="flujo-caja oscura"><span class="material-symbols-rounded">settings</span><b>Proceso</b><small>Pasos de la receta · comparar uno por uno</small></div>
+        <span class="material-symbols-rounded flujo-flecha">arrow_forward</span>
+        <div class="flujo-caja"><span class="material-symbols-rounded">logout</span><b>Salida</b><small>El plato listo · el número mayor</small></div>
+      </div>
+
+      <h3>Ejemplo: encontrar el número mayor</h3>
+      <p class="ayuda"><span class="material-symbols-rounded">touch_app</span><span>Avanza con «Siguiente» y mira cómo el algoritmo recorre la lista.</span></p>
+      <ol class="pasos-lista">
+        <li>Toma el primer número y supón que es el mayor.</li>
+        <li>Compáralo con el siguiente. Si el siguiente es más grande, ahora ese es el mayor.</li>
+        <li>Repite hasta llegar al final de la lista. El que quedó es el mayor.</li>
+      </ol>
+      <div class="demo">
+        <div class="cajas" id="i-lista"></div>
+        <p class="demo-texto" id="i-texto"></p>
+        <div class="demo-pie">
+          <span class="demo-contador" id="i-contador"></span>
+          <div class="demo-botones">
+            <button type="button" class="btn tonal" id="i-ant"><span class="material-symbols-rounded">navigate_before</span>Anterior</button>
+            <button type="button" class="btn lleno" id="i-sig">Siguiente<span class="material-symbols-rounded">navigate_next</span></button>
+            <button type="button" class="btn texto" id="i-reiniciar" aria-label="Reiniciar"><span class="material-symbols-rounded">restart_alt</span></button>
+            <button type="button" class="btn texto" id="i-nuevos"><span class="material-symbols-rounded">shuffle</span>Otros números</button>
+          </div>
         </div>
-        <div class="segmentado" id="m-objetivo">
-          <button type="button" data-valor="min"><span class="material-symbols-rounded">south</span>Minimizar</button>
-          <button type="button" data-valor="max"><span class="material-symbols-rounded">north</span>Maximizar</button>
-        </div>
-      </div>
-      <div class="fila-controles">
-        <label class="campo compacto"><span id="m-etq-filas">Filas</span><input type="number" id="m-filas" min="1" max="20" inputmode="numeric"></label>
-        <label class="campo compacto" id="m-caja-columnas"><span>Columnas</span><input type="number" id="m-columnas" min="1" max="20" inputmode="numeric"></label>
-        <button type="button" class="btn tonal" id="m-aplicar-tam"><span class="material-symbols-rounded">aspect_ratio</span>Aplicar tamaño</button>
-        <button type="button" class="btn tonal" id="m-aleatoria"><span class="material-symbols-rounded">casino</span>Aleatoria</button>
-        <button type="button" class="btn tonal" id="m-limpiar"><span class="material-symbols-rounded">backspace</span>Limpiar</button>
-      </div>
-      <p class="ayuda" id="m-ayuda"></p>
-    </div>
-
-    <div class="tarjeta">
-      <div class="tabla-scroll"><table class="matriz" id="m-tabla"></table></div>
-      <div class="acciones">
-        <button type="button" class="btn lleno" id="m-resolver"><span class="material-symbols-rounded">play_arrow</span>Resolver</button>
-        <button type="button" class="btn contorno" id="m-a-grafo"><span class="material-symbols-rounded">hub</span>Ver como grafo</button>
-        <span class="espacio"></span>
-        <button type="button" class="btn contorno" id="m-guardar"><span class="material-symbols-rounded">download</span>Guardar</button>
-        <button type="button" class="btn contorno" id="m-abrir"><span class="material-symbols-rounded">folder_open</span>Abrir</button>
       </div>
     </div>
 
-    <div id="m-resultado"></div>
+    <div class="tarjeta" id="i-usos">
+      <span class="sobretitulo">2 · Aplicaciones</span>
+      <h2>¿Para qué se utilizan?</h2>
+      <p class="lead">Están en casi todo lo que usas a diario. Varios de estos problemas se representan con <b>grafos</b>: puntos (nodos) unidos por conexiones.</p>
+      <div class="rejilla-mini">
+        <div class="mini"><span class="material-symbols-rounded">map</span><h4>Rutas en el mapa</h4><p>El GPS busca el camino más corto entre tu casa y tu destino. Las esquinas son nodos y las calles, conexiones con su distancia.</p></div>
+        <div class="mini"><span class="material-symbols-rounded">assignment_ind</span><h4>Repartir tareas</h4><p>Decidir qué persona hace qué trabajo para gastar lo menos posible. Es el problema de asignación.</p></div>
+        <div class="mini"><span class="material-symbols-rounded">calendar_month</span><h4>Planificar proyectos</h4><p>Saber cuánto dura una obra y qué actividades no pueden retrasarse. Es lo que calcula Johnson.</p></div>
+        <div class="mini"><span class="material-symbols-rounded">search</span><h4>Buscar y ordenar</h4><p>Un buscador ordena millones de páginas en milisegundos; tus contactos aparecen en orden alfabético.</p></div>
+        <div class="mini"><span class="material-symbols-rounded">group</span><h4>Redes sociales</h4><p>Las personas son nodos y las amistades conexiones. Así se sugieren «personas que quizá conozcas».</p></div>
+        <div class="mini"><span class="material-symbols-rounded">lan</span><h4>Redes de computadoras</h4><p>Los routers eligen por dónde enviar cada paquete de datos para que llegue rápido.</p></div>
+      </div>
+    </div>
+
+    <div class="tarjeta" id="i-caracteristicas">
+      <span class="sobretitulo">3 · Propiedades</span>
+      <h2>Características de un algoritmo</h2>
+      <p class="lead">Para que una lista de pasos sea un algoritmo, tiene que cumplir con todo esto:</p>
+      <div class="rejilla-mini">
+        <div class="mini"><span class="material-symbols-rounded">flag</span><h4>Finito</h4><p>Termina después de un número limitado de pasos. «Repetir para siempre» no es un algoritmo.</p></div>
+        <div class="mini"><span class="material-symbols-rounded">center_focus_strong</span><h4>Preciso</h4><p>Cada paso dice exactamente qué hacer. «Echa un poco de sal» no es preciso; «echa 5 gramos» sí.</p></div>
+        <div class="mini"><span class="material-symbols-rounded">format_list_numbered</span><h4>Ordenado</h4><p>Los pasos van en una secuencia definida: primero uno, luego el otro.</p></div>
+        <div class="mini"><span class="material-symbols-rounded">input</span><h4>Tiene entrada</h4><p>Recibe cero o más datos para trabajar, como la lista de números del ejemplo.</p></div>
+        <div class="mini"><span class="material-symbols-rounded">output</span><h4>Tiene salida</h4><p>Produce al menos un resultado, como el número mayor.</p></div>
+        <div class="mini"><span class="material-symbols-rounded">bolt</span><h4>Efectivo</h4><p>Cada paso se puede hacer de verdad, con lápiz y papel o con una computadora.</p></div>
+      </div>
+    </div>
+
+    <div class="tarjeta" id="i-complejidad">
+      <span class="sobretitulo">4 · Eficiencia</span>
+      <h2>Complejidad algorítmica</h2>
+      <p class="lead">No basta con que un algoritmo funcione: también importa <b>cuánto trabajo hace cuando los datos crecen</b>. Eso es la complejidad. No se mide en segundos (eso depende de la computadora), sino contando operaciones según el tamaño de la entrada, que se llama <b>n</b>.</p>
+      <div class="rejilla-2 ancha">
+        <div class="mini"><span class="material-symbols-rounded">timer</span><h4>Complejidad temporal</h4><p>Cuántas operaciones hace. Buscar el mayor en 5 números toma 4 comparaciones; en 1 000 números, 999.</p></div>
+        <div class="mini"><span class="material-symbols-rounded">memory</span><h4>Complejidad espacial</h4><p>Cuánta memoria necesita. Una matriz de adyacencia de 10 nodos guarda 10 × 10 = 100 celdas.</p></div>
+      </div>
+      <h3>La notación O grande</h3>
+      <p>Se escribe <b>O(…)</b> y describe cómo crece el trabajo en el <b>peor caso</b>, ignorando detalles pequeños. Por ejemplo, O(n) significa que si los datos se duplican, el trabajo también se duplica. Estas son las más comunes, de la más rápida a la más lenta:</p>
+      <div class="tabla-scroll"><table class="datos texto">
+        <thead><tr><th>Notación</th><th>Nombre</th><th>Ejemplo</th><th>Operaciones con n = 1 000</th></tr></thead>
+        <tbody>
+          <tr><td><b>O(1)</b></td><td>Constante</td><td>Ver el primer elemento de una lista</td><td>1</td></tr>
+          <tr><td><b>O(log n)</b></td><td>Logarítmica</td><td>Búsqueda binaria: buscar una palabra en un diccionario abriéndolo por la mitad</td><td>≈ 10</td></tr>
+          <tr><td><b>O(n)</b></td><td>Lineal</td><td>Encontrar el número mayor</td><td>1 000</td></tr>
+          <tr><td><b>O(n log n)</b></td><td>Linealítmica</td><td>Ordenar con Merge Sort</td><td>≈ 10 000</td></tr>
+          <tr><td><b>O(n²)</b></td><td>Cuadrática</td><td>Comparar todos contra todos (Bubble Sort)</td><td>1 000 000</td></tr>
+          <tr><td><b>O(n³)</b></td><td>Cúbica</td><td>Método húngaro (asignación)</td><td>1 000 000 000</td></tr>
+          <tr><td><b>O(2ⁿ)</b></td><td>Exponencial</td><td>Probar todas las combinaciones posibles</td><td>≈ 10³⁰¹</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Compruébalo tú mismo</h3>
+      <p class="ayuda"><span class="material-symbols-rounded">touch_app</span><span>Mueve el control para cambiar el tamaño de la entrada. El tiempo supone una computadora que hace mil millones de operaciones por segundo.</span></p>
+      <div class="complejidad">
+        <label class="deslizador">
+          <span>Tamaño de la entrada: <b>n = <span id="i-n-valor"></span></b></span>
+          <input type="range" id="i-n" min="0" max="8" step="1" value="3">
+        </label>
+        <div id="i-barras"></div>
+      </div>
+
+      <h3>Complejidad de los algoritmos de esta página</h3>
+      <div class="tabla-scroll"><table class="datos texto">
+        <thead><tr><th>Algoritmo</th><th>Complejidad</th><th>¿Qué significa?</th></tr></thead>
+        <tbody>
+          <tr><td>Matriz de adyacencia</td><td><b>O(V²)</b></td><td>Con V nodos la tabla tiene V × V celdas: 10 nodos son 100 celdas.</td></tr>
+          <tr><td>Método húngaro</td><td><b>O(n³)</b></td><td>Para 10 agentes, del orden de 1 000 pasos. Probar todas las asignaciones posibles serían 10! = 3 628 800.</td></tr>
+          <tr><td>Algoritmo de Johnson</td><td><b>O(V + E)</b></td><td>Recorre cada nodo (V) y cada actividad (E) una vez de ida y otra de vuelta: 10 nodos y 15 actividades son unas 50 operaciones.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="tarjeta" id="i-videos">
+      <span class="sobretitulo">5 · Para reforzar</span>
+      <h2>Videos de apoyo</h2>
+      <p class="lead">Videos en español, en YouTube, que explican cada tema con otros ejemplos.</p>
+      <div class="videos">
+        <a class="video" href="https://www.youtube.com/watch?v=VqrgF7i9Sx0" target="_blank" rel="noopener">
+          <div class="mini-portada"><img src="https://i.ytimg.com/vi/VqrgF7i9Sx0/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="material-symbols-rounded">play_circle</span></div>
+          <span class="video-tema">Algoritmos</span>
+          <h4>¿Qué es y cómo funciona un algoritmo?</h4>
+          <small>Universitat Rovira i Virgili</small>
+        </a>
+        <a class="video" href="https://www.youtube.com/watch?v=htrwSQ6HzPQ" target="_blank" rel="noopener">
+          <div class="mini-portada"><img src="https://i.ytimg.com/vi/htrwSQ6HzPQ/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="material-symbols-rounded">play_circle</span></div>
+          <span class="video-tema">Complejidad</span>
+          <h4>Notación Big O: complejidad algorítmica con ejemplos</h4>
+          <small>Jorge Cardona</small>
+        </a>
+        <a class="video" href="https://www.youtube.com/watch?v=JBm5OXbReQE" target="_blank" rel="noopener">
+          <div class="mini-portada"><img src="https://i.ytimg.com/vi/JBm5OXbReQE/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="material-symbols-rounded">play_circle</span></div>
+          <span class="video-tema">Complejidad</span>
+          <h4>Complejidad computacional 101: Big O, búsqueda lineal y binaria</h4>
+          <small>Victor Sanz</small>
+        </a>
+        <a class="video" href="https://www.youtube.com/watch?v=tC1bpr8Zq1A" target="_blank" rel="noopener">
+          <div class="mini-portada"><img src="https://i.ytimg.com/vi/tC1bpr8Zq1A/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="material-symbols-rounded">play_circle</span></div>
+          <span class="video-tema">Grafos</span>
+          <h4>Introducción a grafos: formas de representación</h4>
+          <small>Algoritmos y Estructuras de Datos II</small>
+        </a>
+        <a class="video" href="https://www.youtube.com/watch?v=e6k5na8SSmQ" target="_blank" rel="noopener">
+          <div class="mini-portada"><img src="https://i.ytimg.com/vi/e6k5na8SSmQ/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="material-symbols-rounded">play_circle</span></div>
+          <span class="video-tema">Grafos</span>
+          <h4>Matriz de adyacencia · Teoría de grafos</h4>
+          <small>Matemáticas x Gonzalo</small>
+        </a>
+        <a class="video" href="https://www.youtube.com/watch?v=_XvIC2KvWvo" target="_blank" rel="noopener">
+          <div class="mini-portada"><img src="https://i.ytimg.com/vi/_XvIC2KvWvo/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="material-symbols-rounded">play_circle</span></div>
+          <span class="video-tema">Asignación</span>
+          <h4>Modelo de asignación: método húngaro, ejercicio resuelto</h4>
+          <small>Alvaro Jesus Nina Laura</small>
+        </a>
+        <a class="video" href="https://www.youtube.com/watch?v=AeNQ68kvZvU" target="_blank" rel="noopener">
+          <div class="mini-portada"><img src="https://i.ytimg.com/vi/AeNQ68kvZvU/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="material-symbols-rounded">play_circle</span></div>
+          <span class="video-tema">Johnson · ruta crítica</span>
+          <h4>Método de la ruta crítica (CPM): teoría y ejemplos</h4>
+          <small>Henry Zeledon</small>
+        </a>
+      </div>
+    </div>
+
+    <div class="siguiente">
+      <p>¿Listo? Sigue con los grafos, la base de las otras dos pantallas.</p>
+      <a class="btn lleno grande" href="#grafos" data-ir="grafos">Ir a Grafos<span class="material-symbols-rounded">arrow_forward</span></a>
+    </div>
   </section>
 
   <section id="v-grafos" class="vista">
     <div class="encabezado-vista">
       <h1>Grafos</h1>
-      <p>Diseña un grafo dirigido con pesos, bucles y cardinalidad, y genera su matriz de adyacencia.</p>
+      <p>Dibuja un grafo y mira cómo se representa como matriz.</p>
     </div>
 
-    <div class="tarjeta">
-      <div class="barra-herramientas" id="g-herramientas">
-        <button type="button" class="herr" data-herr="mover"><span class="material-symbols-rounded">open_with</span><span>Mover</span></button>
-        <button type="button" class="herr" data-herr="nodo"><span class="material-symbols-rounded">add_circle</span><span>Nodo</span></button>
-        <button type="button" class="herr" data-herr="conectar"><span class="material-symbols-rounded">arrow_right_alt</span><span>Conectar</span></button>
-        <button type="button" class="herr" data-herr="editar"><span class="material-symbols-rounded">edit</span><span>Editar</span></button>
-        <button type="button" class="herr" data-herr="borrar"><span class="material-symbols-rounded">delete</span><span>Borrar</span></button>
+    <details class="tarjeta aprende" open>
+      <summary><span class="material-symbols-rounded">menu_book</span><span>¿Qué es un grafo?</span><span class="material-symbols-rounded flecha">expand_more</span></summary>
+      <p class="lead">Un <b>grafo</b> es un conjunto de puntos, llamados <b>nodos</b> (o vértices), unidos por líneas llamadas <b>aristas</b> (o conexiones). Sirve para representar cualquier cosa que esté relacionada: ciudades y carreteras, personas y amistades, tareas y el orden en que se hacen.</p>
+      <div class="conceptos">
+        <div class="concepto">
+          <svg viewBox="0 0 140 70" aria-hidden="true"><circle cx="70" cy="35" r="17" class="n"/><text x="70" y="40">A</text></svg>
+          <h4>Nodo</h4><p>Un punto del grafo. Representa un elemento: una ciudad, una persona, un evento.</p>
+        </div>
+        <div class="concepto">
+          <svg viewBox="0 0 140 70" aria-hidden="true"><path d="M45 35 H93" class="a"/><circle cx="28" cy="35" r="16" class="n"/><text x="28" y="40">A</text><circle cx="112" cy="35" r="16" class="n"/><text x="112" y="40">B</text></svg>
+          <h4>Arista dirigida</h4><p>Una conexión con sentido: va de un origen a un destino. A → B no es lo mismo que B → A.</p>
+        </div>
+        <div class="concepto">
+          <svg viewBox="0 0 140 70" aria-hidden="true"><path d="M45 35 H93" class="a"/><rect x="58" y="23" width="24" height="22" rx="11" class="p"/><text x="70" y="39" class="t">5</text><circle cx="28" cy="35" r="16" class="n"/><text x="28" y="40">A</text><circle cx="112" cy="35" r="16" class="n"/><text x="112" y="40">B</text></svg>
+          <h4>Peso</h4><p>El número de una conexión: una distancia, un costo o un tiempo.</p>
+        </div>
+        <div class="concepto">
+          <svg viewBox="0 0 140 70" aria-hidden="true"><path d="M59 39 C36 -2 104 -2 81 39" class="a"/><circle cx="70" cy="50" r="15" class="n"/><text x="70" y="55">A</text></svg>
+          <h4>Bucle</h4><p>Una conexión de un nodo hacia sí mismo.</p>
+        </div>
+        <div class="concepto">
+          <svg viewBox="0 0 140 70" aria-hidden="true"><path d="M43 28 Q70 12 95 28" class="a"/><path d="M97 43 Q70 59 45 43" class="a"/><circle cx="28" cy="35" r="16" class="n"/><text x="28" y="40">A</text><circle cx="112" cy="35" r="16" class="n"/><text x="112" y="40">B</text></svg>
+          <h4>Ida y vuelta</h4><p>Entre dos nodos puede haber como máximo dos conexiones: una en cada sentido.</p>
+        </div>
+        <div class="concepto">
+          <svg viewBox="0 0 140 70" aria-hidden="true"><path d="M14 12 L52 28" class="a"/><path d="M14 58 L52 42" class="a"/><path d="M87 35 H124" class="a"/><circle cx="70" cy="35" r="16" class="n"/><text x="70" y="40">A</text></svg>
+          <h4>Entradas y salidas</h4><p>Es la cardinalidad: cuántas conexiones llegan al nodo (E) y cuántas salen (S). Aquí A tiene E2 · S1.</p>
+        </div>
       </div>
-      <p class="ayuda" id="g-ayuda"></p>
-      <div class="lienzo" id="g-lienzo">
-        <svg id="g-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-          <defs>
-            <marker id="g-flecha" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0.8 L10 5 L0 9.2 Z" fill="#2b2b2b"/></marker>
-            <marker id="g-flecha-negra" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0.8 L10 5 L0 9.2 Z" fill="#000000"/></marker>
-            <marker id="g-flecha-gris" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0.8 L10 5 L0 9.2 Z" fill="#c4c4c4"/></marker>
-            <filter id="g-sombra" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.2"/></filter>
-          </defs>
-          <g id="g-capa"></g>
+
+      <h3>La matriz de adyacencia</h3>
+      <div class="ejemplo-matriz">
+        <svg viewBox="0 0 240 120" aria-hidden="true" class="ilus">
+          <path d="M53 70 L100 42" class="a"/>
+          <path d="M140 42 L187 70" class="a"/>
+          <path d="M193 74 C178 22 230 22 214 74" class="a"/>
+          <rect x="62" y="44" width="22" height="20" rx="10" class="p"/><text x="73" y="58" class="t">4</text>
+          <rect x="155" y="44" width="22" height="20" rx="10" class="p"/><text x="166" y="58" class="t">3</text>
+          <rect x="193" y="18" width="22" height="20" rx="10" class="p"/><text x="204" y="32" class="t">1</text>
+          <circle cx="40" cy="80" r="16" class="n"/><text x="40" y="85">A</text>
+          <circle cx="120" cy="34" r="16" class="n"/><text x="120" y="39">B</text>
+          <circle cx="200" cy="88" r="16" class="n"/><text x="200" y="93">C</text>
         </svg>
+        <div>
+          <p>Es una tabla que guarda el grafo: <b>cada fila es un nodo de origen y cada columna un nodo de destino</b>. Si hay una conexión de A a B, en la celda (A, B) va su peso; si no la hay, va 0.</p>
+          <table class="mini-matriz">
+            <thead><tr><th></th><th>A</th><th>B</th><th>C</th></tr></thead>
+            <tbody>
+              <tr><th>A</th><td>0</td><td class="si">4</td><td>0</td></tr>
+              <tr><th>B</th><td>0</td><td>0</td><td class="si">3</td></tr>
+              <tr><th>C</th><td>0</td><td>0</td><td class="si">1</td></tr>
+            </tbody>
+          </table>
+          <p class="ayuda">La diagonal (A,A), (B,B), (C,C) corresponde a los bucles: C → C vale 1.</p>
+        </div>
       </div>
-      <div class="acciones">
-        <button type="button" class="btn tonal" id="g-organizar"><span class="material-symbols-rounded">auto_awesome_mosaic</span>Organizar</button>
-        <button type="button" class="btn tonal" id="g-limpiar"><span class="material-symbols-rounded">delete_sweep</span>Limpiar</button>
-        <button type="button" class="btn tonal" id="g-quitar" hidden><span class="material-symbols-rounded">format_color_reset</span>Quitar resaltado</button>
-        <label class="check"><input type="checkbox" id="g-card" checked><span>Cardinalidad en nodos</span></label>
+
+      <h3>Cómo usar el editor</h3>
+      <ol class="pasos-lista">
+        <li>Elige <b>Nodo</b> y toca el lienzo para crear nodos.</li>
+        <li>Elige <b>Conectar</b>, toca el origen y luego el destino, y escribe el peso.</li>
+        <li>Abajo se arma sola la matriz de adyacencia y la tabla de entradas y salidas.</li>
+        <li>Con <b>Enviar a Asignación</b> o <b>Enviar a Johnson</b> resuelves el grafo con esos algoritmos.</li>
+      </ol>
+      <div class="videos-chicos">
+        <a href="https://www.youtube.com/watch?v=tC1bpr8Zq1A" target="_blank" rel="noopener"><span class="material-symbols-rounded">smart_display</span>Video: Introducción a grafos, formas de representación</a>
+        <a href="https://www.youtube.com/watch?v=e6k5na8SSmQ" target="_blank" rel="noopener"><span class="material-symbols-rounded">smart_display</span>Video: Matriz de adyacencia (4 min)</a>
+      </div>
+    </details>
+
+    <div class="tarjeta">
+      <div id="g-editor" class="editor"></div>
+      <div class="acciones separadas">
+        <button type="button" class="btn lleno" id="g-a-asignacion"><span class="material-symbols-rounded">assignment_ind</span>Enviar a Asignación</button>
+        <button type="button" class="btn lleno" id="g-a-johnson"><span class="material-symbols-rounded">route</span>Enviar a Johnson</button>
         <span class="espacio"></span>
-        <button type="button" class="btn contorno" id="g-a-matriz"><span class="material-symbols-rounded">grid_on</span>Enviar a Matrices</button>
         <button type="button" class="btn contorno" id="g-png"><span class="material-symbols-rounded">image</span>PNG</button>
         <button type="button" class="btn contorno" id="g-guardar"><span class="material-symbols-rounded">download</span>Guardar</button>
         <button type="button" class="btn contorno" id="g-abrir"><span class="material-symbols-rounded">folder_open</span>Abrir</button>
@@ -231,7 +427,7 @@
             <button type="button" data-valor="binaria">Binaria</button>
           </div>
         </div>
-        <p class="ayuda">Fila = origen, columna = destino. Puedes editar los pesos aquí y aplicarlos al grafo; celda vacía = sin conexión.</p>
+        <p class="ayuda">Fila = origen, columna = destino, 0 = sin conexión. Puedes escribir pesos aquí y pasarlos al dibujo con «Aplicar matriz al grafo».</p>
         <div class="tabla-scroll"><table class="matriz" id="g-matriz"></table></div>
         <div class="acciones">
           <button type="button" class="btn lleno" id="g-aplicar"><span class="material-symbols-rounded">done</span>Aplicar matriz al grafo</button>
@@ -240,11 +436,164 @@
       </div>
       <div class="tarjeta">
         <div class="titulo-tarjeta"><h2>Cardinalidad</h2></div>
-        <p class="ayuda">Entradas: conexiones que llegan al nodo. Salidas: conexiones que salen de él. Un bucle cuenta como entrada y como salida.</p>
+        <p class="ayuda">Entradas: conexiones que llegan al nodo. Salidas: conexiones que salen de él. Un bucle cuenta como entrada y como salida. Grado = entradas + salidas.</p>
         <div class="tabla-scroll"><table class="datos" id="g-cardinalidad"></table></div>
         <div class="chips" id="g-resumen"></div>
       </div>
     </div>
+  </section>
+
+  <section id="v-asignacion" class="vista">
+    <div class="encabezado-vista">
+      <h1>Método de asignación</h1>
+      <p>Asigna una tarea a cada agente con el menor costo o el mayor beneficio, usando el método húngaro.</p>
+    </div>
+
+    <details class="tarjeta aprende" open>
+      <summary><span class="material-symbols-rounded">menu_book</span><span>¿Qué es el problema de asignación?</span><span class="material-symbols-rounded flecha">expand_more</span></summary>
+      <p class="lead">Tienes <b>agentes</b> (personas o máquinas) y <b>tareas</b>. Cada agente puede hacer cada tarea con un costo distinto. Hay que darle <b>una sola tarea a cada agente, sin repetir</b>, de modo que el costo total sea el menor posible (o el beneficio, el mayor).</p>
+      <div class="rejilla-2 ancha">
+        <div class="mini"><span class="material-symbols-rounded">calculate</span><h4>¿Por qué no probar todo?</h4><p>Con 3 agentes hay 3! = 6 formas de repartir las tareas: se puede a mano. Con 10 agentes son 10! = 3 628 800. El método húngaro llega a la mejor en unos 10³ = 1 000 pasos: es O(n³).</p></div>
+        <div class="mini"><span class="material-symbols-rounded">table_view</span><h4>La matriz</h4><p>Cada fila es un agente y cada columna una tarea. La celda dice cuánto cuesta que ese agente haga esa tarea. Si un agente no puede hacer una tarea, la celda se deja vacía («—»).</p></div>
+      </div>
+      <h3>Los pasos del método húngaro</h3>
+      <ol class="pasos-lista">
+        <li><b>Preparar la matriz.</b> Se eliminan las filas y columnas que no tienen ningún valor. Si quedan más filas que columnas (o al revés), se agregan <b>ficticias</b> con costo 0 hasta que sea cuadrada.</li>
+        <li><b>Si se maximiza</b>, se resta cada valor del mayor de la matriz: el método solo sabe minimizar.</li>
+        <li><b>Reducir filas:</b> a cada fila se le resta su menor valor.</li>
+        <li><b>Reducir columnas:</b> a cada columna se le resta su menor valor.</li>
+        <li><b>Tapar los ceros</b> con la menor cantidad de líneas. Si hacen falta tantas líneas como filas, ya hay solución.</li>
+        <li>Si no, se busca el <b>menor valor sin tapar</b>, se resta a los no tapados y se suma en los cruces de líneas. Se vuelve al paso 5.</li>
+        <li><b>Elegir un cero por fila y por columna.</b> Esa es la asignación óptima.</li>
+      </ol>
+      <div class="callout">
+        <span class="material-symbols-rounded">lightbulb</span>
+        <p><b>¿Qué es una fila o columna ficticia?</b> Si hay 4 agentes y 3 tareas, uno de ellos se quedará sin tarea. Para que el método funcione se inventa una «tarea ficticia» con costo 0: el agente que la reciba es el que se queda libre. Lo mismo pasa al revés con un agente ficticio.</p>
+      </div>
+      <div class="videos-chicos">
+        <a href="https://www.youtube.com/watch?v=_XvIC2KvWvo" target="_blank" rel="noopener"><span class="material-symbols-rounded">smart_display</span>Video: Método húngaro, ejercicio resuelto (18 min)</a>
+      </div>
+    </details>
+
+    <div class="tarjeta" id="a-entrada">
+      <div class="fila-controles">
+        <div class="campo-seg">
+          <span>Trabajar con</span>
+          <div class="segmentado" id="a-modo">
+            <button type="button" data-valor="matriz"><span class="material-symbols-rounded">grid_on</span>Matriz</button>
+            <button type="button" data-valor="grafo"><span class="material-symbols-rounded">hub</span>Grafo</button>
+          </div>
+        </div>
+        <div class="campo-seg">
+          <span>Objetivo</span>
+          <div class="segmentado" id="a-objetivo">
+            <button type="button" data-valor="min"><span class="material-symbols-rounded">south</span>Minimizar costo</button>
+            <button type="button" data-valor="max"><span class="material-symbols-rounded">north</span>Maximizar beneficio</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="a-panel-matriz">
+        <div class="fila-controles">
+          <label class="campo compacto"><span>Agentes</span><input type="number" id="a-filas" min="1" max="20" inputmode="numeric"></label>
+          <label class="campo compacto"><span>Tareas</span><input type="number" id="a-columnas" min="1" max="20" inputmode="numeric"></label>
+          <button type="button" class="btn tonal" id="a-aplicar-tam"><span class="material-symbols-rounded">aspect_ratio</span>Aplicar tamaño</button>
+          <button type="button" class="btn tonal" id="a-ejemplo"><span class="material-symbols-rounded">lightbulb</span>Ejemplo</button>
+          <button type="button" class="btn tonal" id="a-aleatoria"><span class="material-symbols-rounded">casino</span>Aleatoria</button>
+          <button type="button" class="btn tonal" id="a-limpiar"><span class="material-symbols-rounded">backspace</span>Limpiar</button>
+        </div>
+        <p class="ayuda"><span class="material-symbols-rounded">info</span><span>Filas = agentes, columnas = tareas. Deja una celda vacía («—») si esa asignación no es posible. Puedes cambiar los nombres y pegar una tabla desde Excel.</span></p>
+        <p class="nota" id="a-nota" hidden></p>
+        <div class="tabla-scroll"><table class="matriz" id="a-tabla"></table></div>
+      </div>
+
+      <div id="a-panel-grafo" hidden>
+        <p class="ayuda"><span class="material-symbols-rounded">info</span><span>Dibuja los agentes y las tareas como nodos y conecta cada agente con las tareas que puede hacer. El peso de cada flecha es el costo. Al resolver, la matriz se arma solo con los nodos que tienen conexiones.</span></p>
+        <div id="a-editor" class="editor"></div>
+      </div>
+
+      <div class="acciones separadas">
+        <button type="button" class="btn lleno grande" id="a-resolver"><span class="material-symbols-rounded">play_arrow</span>Resolver</button>
+        <span class="espacio"></span>
+        <button type="button" class="btn contorno" id="a-guardar"><span class="material-symbols-rounded">download</span>Guardar</button>
+        <button type="button" class="btn contorno" id="a-abrir"><span class="material-symbols-rounded">folder_open</span>Abrir</button>
+      </div>
+    </div>
+
+    <div id="a-resultado" class="resultado"></div>
+  </section>
+
+  <section id="v-johnson" class="vista">
+    <div class="encabezado-vista">
+      <h1>Algoritmo de Johnson</h1>
+      <p>Encuentra la ruta crítica de una red de actividades: tiempos más tempranos, más tardíos y holguras.</p>
+    </div>
+
+    <details class="tarjeta aprende" open>
+      <summary><span class="material-symbols-rounded">menu_book</span><span>¿Qué hace el algoritmo de Johnson?</span><span class="material-symbols-rounded flecha">expand_more</span></summary>
+      <p class="lead">Sirve para <b>planificar un proyecto</b> dibujado como una red. Cada <b>nodo es un evento</b> (el momento en que algo empieza o termina) y cada <b>flecha es una actividad</b> con su duración. El algoritmo calcula cuándo puede ocurrir cada evento lo más pronto y lo más tarde posible, y encuentra la <b>ruta crítica</b>: las actividades que, si se retrasan, retrasan todo el proyecto.</p>
+      <div class="conceptos">
+        <div class="concepto texto"><b class="sigla">TE</b><h4>Tiempo temprano</h4><p>Lo más pronto que puede ocurrir un evento. Se calcula de ida: TE(j) = máx(TE(i) + duración).</p></div>
+        <div class="concepto texto"><b class="sigla">TL</b><h4>Tiempo tardío</h4><p>Lo más tarde que puede ocurrir sin retrasar el final. Se calcula de vuelta: TL(i) = mín(TL(j) − duración).</p></div>
+        <div class="concepto texto"><b class="sigla">h</b><h4>Holgura</h4><p>El margen que tiene un evento o actividad. Si TE = 5 y TL = 8, ese evento puede retrasarse hasta 3 sin problema.</p></div>
+        <div class="concepto texto"><b class="sigla">RC</b><h4>Ruta crítica</h4><p>El camino del inicio al final formado por actividades con holgura 0. Su largo es la duración del proyecto.</p></div>
+      </div>
+      <h3>¿Por qué se toma el máximo en la ida?</h3>
+      <p>Un evento solo ocurre cuando terminan <b>todas</b> las actividades que llegan a él. Si a un nodo llegan una actividad que termina en el día 8 y otra que termina en el día 9, el evento ocurre recién el día 9. Por eso, para la ruta crítica se <b>maximiza</b>. Si eliges <b>minimizar</b>, el mismo procedimiento con mínimos encuentra el camino más corto desde el inicio hasta el final.</p>
+      <div class="callout">
+        <span class="material-symbols-rounded">lightbulb</span>
+        <p><b>Reglas de la red:</b> las flechas siempre avanzan, así que no puede haber <b>bucles</b> (un nodo hacia sí mismo) ni <b>ciclos</b> (un camino que vuelve a un nodo por el que ya pasó). El algoritmo recorre cada nodo y cada actividad dos veces, así que es O(V + E).</p>
+      </div>
+      <div class="videos-chicos">
+        <a href="https://www.youtube.com/watch?v=AeNQ68kvZvU" target="_blank" rel="noopener"><span class="material-symbols-rounded">smart_display</span>Video: Método de la ruta crítica, teoría y ejemplos (18 min)</a>
+      </div>
+    </details>
+
+    <div class="tarjeta" id="j-entrada">
+      <div class="fila-controles">
+        <div class="campo-seg">
+          <span>Trabajar con</span>
+          <div class="segmentado" id="j-modo">
+            <button type="button" data-valor="grafo"><span class="material-symbols-rounded">hub</span>Red</button>
+            <button type="button" data-valor="matriz"><span class="material-symbols-rounded">grid_on</span>Matriz</button>
+          </div>
+        </div>
+        <div class="campo-seg">
+          <span>Objetivo</span>
+          <div class="segmentado" id="j-objetivo">
+            <button type="button" data-valor="max"><span class="material-symbols-rounded">north</span>Maximizar (ruta crítica)</button>
+            <button type="button" data-valor="min"><span class="material-symbols-rounded">south</span>Minimizar</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="j-panel-grafo">
+        <p class="ayuda"><span class="material-symbols-rounded">info</span><span>Cada flecha es una actividad y su peso es la duración. Ya hay un ejemplo cargado: presiona «Resolver» para verlo.</span></p>
+        <div id="j-editor" class="editor"></div>
+      </div>
+
+      <div id="j-panel-matriz" hidden>
+        <div class="fila-controles">
+          <label class="campo compacto"><span>Nodos</span><input type="number" id="j-nodos" min="2" max="20" inputmode="numeric"></label>
+          <button type="button" class="btn tonal" id="j-aplicar-tam"><span class="material-symbols-rounded">aspect_ratio</span>Aplicar tamaño</button>
+          <button type="button" class="btn tonal" id="j-ejemplo"><span class="material-symbols-rounded">lightbulb</span>Ejemplo</button>
+          <button type="button" class="btn tonal" id="j-aleatoria"><span class="material-symbols-rounded">casino</span>Aleatoria</button>
+          <button type="button" class="btn tonal" id="j-limpiar"><span class="material-symbols-rounded">backspace</span>Limpiar</button>
+        </div>
+        <p class="ayuda"><span class="material-symbols-rounded">info</span><span>La celda (fila → columna) es la duración de la actividad entre esos dos nodos. Deja «—» si no hay actividad. La diagonal está bloqueada porque un nodo no se conecta consigo mismo.</span></p>
+        <p class="nota" id="j-nota" hidden></p>
+        <div class="tabla-scroll"><table class="matriz" id="j-tabla"></table></div>
+      </div>
+
+      <div class="acciones separadas">
+        <button type="button" class="btn lleno grande" id="j-resolver"><span class="material-symbols-rounded">play_arrow</span>Resolver</button>
+        <span class="espacio"></span>
+        <button type="button" class="btn contorno" id="j-guardar"><span class="material-symbols-rounded">download</span>Guardar</button>
+        <button type="button" class="btn contorno" id="j-abrir"><span class="material-symbols-rounded">folder_open</span>Abrir</button>
+      </div>
+    </div>
+
+    <div id="j-resultado" class="resultado"></div>
   </section>
 
 </main>
@@ -269,8 +618,11 @@
 
 <script src="js/utilidades.js"></script>
 <script src="js/algoritmos.js"></script>
-<script src="js/matrices.js"></script>
+<script src="js/editor.js"></script>
+<script src="js/introduccion.js"></script>
 <script src="js/grafos.js"></script>
+<script src="js/asignacion.js"></script>
+<script src="js/johnson.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
