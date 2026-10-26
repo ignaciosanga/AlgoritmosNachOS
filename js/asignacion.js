@@ -99,12 +99,38 @@ const Asignacion = (() => {
     $('#a-tabla').innerHTML = h + '</tbody>';
   }
 
+  function dimension() {
+    const lleno = v => { const x = U.leerCelda(v, true); return !x.malo && x.v !== null && x.v !== Infinity; };
+    const f0 = A.valores.length, c0 = A.valores[0].length;
+    const f = A.valores.filter(r => r.some(lleno)).length;
+    const c = A.columnas.filter((_, j) => A.valores.some(r => lleno(r[j]))).length;
+    const partes = [];
+    if (f0 - f || c0 - c) {
+      const q = [];
+      if (f0 - f) q.push(`${f0 - f} ${f0 - f === 1 ? 'fila vacía' : 'filas vacías'}`);
+      if (c0 - c) q.push(`${c0 - c} ${c0 - c === 1 ? 'columna vacía' : 'columnas vacías'}`);
+      partes.push(`se eliminan ${q.join(' y ')}`);
+    }
+    let txt;
+    if (!f) txt = 'La matriz todavía no tiene valores.';
+    else if (f === c) txt = `Matriz de <b>${f} × ${c}</b>: es cuadrada.`;
+    else {
+      const k = Math.abs(f - c);
+      partes.push(`se ${k === 1 ? 'agrega una' : 'agregan ' + k} ${f < c ? (k === 1 ? 'fila ficticia' : 'filas ficticias') : (k === 1 ? 'columna ficticia' : 'columnas ficticias')}`);
+      txt = `Matriz de <b>${f} × ${c}</b>: no es cuadrada.`;
+    }
+    if (f && partes.length) txt += ` Al resolver, ${partes.join(' y ')}.`;
+    $('#a-dim').innerHTML = `<span class="material-symbols-rounded">${f && f === c && !partes.length ? 'check_circle' : 'aspect_ratio'}</span><span>${txt}</span>`;
+  }
+
   function dibujar() {
     sincronizar();
     dibujarTabla();
+    dimension();
   }
 
   function cambioMatriz() {
+    dimension();
     fuente = 'matriz';
     mapa = null;
     obsoleto();

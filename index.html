@@ -416,18 +416,26 @@
         <button type="button" class="btn contorno" id="g-guardar"><span class="material-symbols-rounded">download</span>Guardar</button>
         <button type="button" class="btn contorno" id="g-abrir"><span class="material-symbols-rounded">folder_open</span>Abrir</button>
       </div>
+      <div class="estados" id="g-estado"></div>
     </div>
 
     <div class="rejilla-2">
       <div class="tarjeta" id="g-tarjeta-matriz">
         <div class="titulo-tarjeta">
           <h2>Matriz de adyacencia</h2>
-          <div class="segmentado chico" id="g-modo-matriz">
-            <button type="button" data-valor="pesos" class="activo">Pesos</button>
-            <button type="button" data-valor="binaria">Binaria</button>
+          <div class="controles-matriz">
+            <div class="segmentado chico" id="g-vista-matriz">
+              <button type="button" data-valor="compacta" class="activo">Solo con conexiones</button>
+              <button type="button" data-valor="completa">Completa</button>
+            </div>
+            <div class="segmentado chico" id="g-modo-matriz">
+              <button type="button" data-valor="pesos" class="activo">Pesos</button>
+              <button type="button" data-valor="binaria">Binaria</button>
+            </div>
           </div>
         </div>
-        <p class="ayuda">Fila = origen, columna = destino, 0 = sin conexión. Puedes escribir pesos aquí y pasarlos al dibujo con «Aplicar matriz al grafo».</p>
+        <p class="ayuda"><span class="material-symbols-rounded">info</span><span>Fila = origen, columna = destino. Puedes escribir pesos aquí y pasarlos al dibujo con «Aplicar matriz al grafo».</span></p>
+        <p class="nota" id="g-matriz-info"></p>
         <div class="tabla-scroll"><table class="matriz" id="g-matriz"></table></div>
         <div class="acciones">
           <button type="button" class="btn lleno" id="g-aplicar"><span class="material-symbols-rounded">done</span>Aplicar matriz al grafo</button>
@@ -504,6 +512,7 @@
         </div>
         <p class="ayuda"><span class="material-symbols-rounded">info</span><span>Filas = agentes, columnas = tareas. Deja una celda vacía («—») si esa asignación no es posible. Puedes cambiar los nombres y pegar una tabla desde Excel.</span></p>
         <p class="nota" id="a-nota" hidden></p>
+        <p class="dimension" id="a-dim"></p>
         <div class="tabla-scroll"><table class="matriz" id="a-tabla"></table></div>
       </div>
 
