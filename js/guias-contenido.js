@@ -161,7 +161,7 @@ Guia.registrar('northwest', {
   ],
   colores: [['ambar', 'Celda que se está llenando'], ['azul', 'Celda con envío, oferta y demanda'], ['violeta', 'Ficticia o 0 por degeneración'], ['verde', 'Celda que entra al optimizar, costo reducido que mejora y resultado óptimo'], ['rojo', 'Celda que sale del ciclo y signo −'], ['gris', 'Fila o columna ya agotada']],
   consejos: ['La esquina noroeste no mira los costos: es rápida pero casi nunca da el mínimo. Por eso después se optimiza con MODI.', 'Una solución válida siempre tiene m + n − 1 celdas con envío (m orígenes, n destinos). Si faltan, se agrega un 0 (degeneración).'],
-  cuidado: ['La oferta y la demanda no pueden ser negativas. Las celdas de costo vacías cuentan como 0.'],
+  cuidado: ['La oferta y la demanda no pueden ser negativas. Las celdas de costo vacías cuentan como 0.', 'La solución de la esquina noroeste sale igual al minimizar y al maximizar, porque no mira los costos. La diferencia está en la optimización con MODI.', 'Si la oferta y la demanda tienen números iguales (por ejemplo, todo en 10), habrá degeneración: aparecen ceros violetas y algunas iteraciones de MODI tienen θ = 0 y no cambian el resultado. Es normal.'],
   complejidad: 'La esquina noroeste es O(m + n): avanza una celda por paso. Cada iteración de MODI es O(m · n).',
   preguntas: [
     { p: 'En la esquina noroeste, ¿cuánto se asigna a cada celda?', o: ['Siempre la oferta completa', 'El menor entre la oferta que queda y la demanda que queda', 'El costo de la celda', 'La mitad de la demanda'], c: 1, e: 'Se manda todo lo posible: el menor de los dos, para no pasarse de lo que hay ni de lo que se pide.' },

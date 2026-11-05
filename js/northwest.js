@@ -263,7 +263,7 @@ const Northwest = (() => {
     const lista = [{ X: vacio, s: r.oferta.slice(), d: r.demanda.slice(), actual: { i: 0, j: 0 }, texto: `Empezamos en la <b>esquina noroeste</b> (arriba a la izquierda): ${U.esc(r.filas[0])} → ${U.esc(r.cols[0])}. El método no mira los costos: solo reparte la oferta en orden, de izquierda a derecha y de arriba hacia abajo.` }];
     r.pasos.forEach(p => lista.push({ X: p.X, s: p.s, d: p.d, actual: { i: p.i, j: p.j }, texto: U.esc(p.texto) }));
     const basicas = r.inicial.flat().filter(v => v !== null).length;
-    lista.push({ X: r.inicial, s: r.oferta.map(() => 0), d: r.demanda.map(() => 0), fin: true, texto: `Solución inicial lista. ${r.objetivo === 'max' ? 'Ganancia' : 'Costo'} = ${formulaCosto(r, r.inicial)}. Tiene ${basicas} celdas con envío (m + n − 1 = ${m} + ${n} − 1 = ${m + n - 1}), como pide el método.` });
+    lista.push({ X: r.inicial, s: r.oferta.map(() => 0), d: r.demanda.map(() => 0), fin: true, texto: `Solución inicial lista. ${r.objetivo === 'max' ? 'Ganancia' : 'Costo'} = ${formulaCosto(r, r.inicial)}. Tiene ${basicas} celdas con envío (m + n − 1 = ${m} + ${n} − 1 = ${m + n - 1}), como pide el método. Esta tabla sale igual si minimizas o maximizas; lo que cambia es la optimización con MODI.` });
     return lista;
   }
 
@@ -279,7 +279,30 @@ const Northwest = (() => {
       envios.push(`<span class="chip ${fic ? 'violeta' : 'azul'}">${U.esc(r.filas[i])} → ${U.esc(r.cols[j])}: <b>${F(v)}</b>${fic ? ' (no se envía)' : ` × ${F(r.C[i][j])}`}</span>`);
     }));
     const its = r.iteraciones;
-    const mejoras = its.length - 1;
+    const mejoras = its.filter(it => !it.optimo && it.theta > 0).length;
+    const degeneradas = its.filter(it => !it.optimo && it.theta === 0).length;
+    const ceros = r.inicial.flat().filter(v => v === 0).length;
+    const nombreEnvios = (s) => {
+      const l = [];
+      s.final.forEach((fila, i) => fila.forEach((v, j) => { if (v && i !== s.ficF && j !== s.ficC) l.push(`${U.esc(s.filas[i])} → ${U.esc(s.cols[j])} (${F(v)})`); }));
+      return l.join(', ') || 'ningún envío real';
+    };
+    let comparacion = '';
+    if (r.otra) {
+      const rMin = max ? r.otra : r, rMax = max ? r : r.otra;
+      comparacion = `
+        <h3>Minimizar vs. maximizar</h3>
+        <div class="aviso-c c-info"><span class="material-symbols-rounded">help</span><div><b>¿Por qué la esquina noroeste sale igual en los dos casos?</b><p>Porque la esquina noroeste <b>no mira los costos</b> ni si quieres minimizar o maximizar: solo reparte la oferta en orden, de arriba a la izquierda hacia abajo a la derecha. Con la misma oferta y demanda siempre da la misma tabla. La diferencia aparece en el <b>Paso 2 (MODI)</b>, que sí usa los costos y lleva la solución hacia el mínimo o hacia el máximo.</p></div></div>
+        <div class="comparar-obj">
+          <div class="comparar-c ambar"><small>Esquina noroeste (igual en ambos)</small><b>${F(r.costoInicial)}</b><p>Mismo reparto, sin mirar costos.</p></div>
+          <div class="comparar-c azul${max ? '' : ' actual'}"><small>Mínimo con MODI${max ? '' : ' · lo que pediste'}</small><b>${F(rMin.costoFinal)}</b><p>${nombreEnvios(rMin)}</p></div>
+          <div class="comparar-c verde${max ? ' actual' : ''}"><small>Máximo con MODI${max ? ' · lo que pediste' : ''}</small><b>${F(rMax.costoFinal)}</b><p>${nombreEnvios(rMax)}</p></div>
+        </div>
+        ${Math.abs(r.costoFinal - r.costoInicial) <= Math.abs(r.otra.costoFinal - r.costoInicial) / 4 ? `<p class="explicacion">Aquí la esquina noroeste (${F(r.costoInicial)}) quedó cerca del ${max ? 'máximo' : 'mínimo'} (${F(r.costoFinal)}) por casualidad: el reparto en diagonal justo pasa por celdas ${max ? 'caras' : 'baratas'}. Por eso las dos soluciones se parecen tanto, pero no son la misma.</p>` : ''}`;
+    }
+    const avisoDeg = ceros
+      ? `<div class="aviso-c c-especial"><span class="material-symbols-rounded">exposure_zero</span><div><b>Hubo degeneración</b><p>En ${ceros === 1 ? 'un paso' : ceros + ' pasos'} de la esquina noroeste se acabaron la oferta y la demanda <b>al mismo tiempo</b>, así que se agregó un 0 violeta para completar las m + n − 1 celdas que necesita MODI. Esto pasa mucho cuando la oferta y la demanda tienen números iguales (por ejemplo, todo en 10).${degeneradas ? ` Por eso ${degeneradas === 1 ? 'una iteración de MODI tuvo' : degeneradas + ' iteraciones de MODI tuvieron'} θ = 0 y no ${degeneradas === 1 ? 'cambió' : 'cambiaron'} el ${palabra.toLowerCase()}.` : ''}</p></div></div>`
+      : '';
     const bal = r.balanceo.tipo
       ? `<div class="aviso-c c-especial"><span class="material-symbols-rounded">auto_awesome</span><div><b>Se agregó ${r.balanceo.tipo === 'columna' ? 'un destino' : 'un origen'} ficticio</b><p>La oferta total (${F(r.balanceo.tO)}) y la demanda total (${F(r.balanceo.tD)}) no eran iguales. ${r.balanceo.tipo === 'columna' ? 'El destino ficticio recibe' : 'El origen ficticio entrega'} las ${F(r.balanceo.cantidad)} unidades de diferencia con costo 0: en la realidad, esas unidades ${r.balanceo.tipo === 'columna' ? 'se quedan sin enviar' : 'nadie las entrega'}.</p></div></div>`
       : '';
@@ -293,10 +316,11 @@ const Northwest = (() => {
         const e = it.entra;
         const sig = its[k + 1];
         const ciclo = it.ciclo.map((c, q) => `${U.esc(r.filas[c.i])}→${U.esc(r.cols[c.j])} (${q % 2 === 0 ? '+' : '−'})`).join(', ');
-        texto = `${max ? 'La celda con el costo reducido más positivo' : 'La celda con el costo reducido más negativo'} es <b>${U.esc(r.filas[e.i])} → ${U.esc(r.cols[e.j])}</b> (${e.r > 0 ? '+' : ''}${F(e.r)}): por cada unidad que se mande ahí, el ${palabra.toLowerCase()} ${max ? 'sube' : 'baja'} ${F(Math.abs(e.r))}. Se arma el ciclo ${ciclo}. θ = <b>${F(it.theta)}</b> (el menor de las celdas con −). Sale ${U.esc(r.filas[it.sale.i])} → ${U.esc(r.cols[it.sale.j])}. El ${palabra.toLowerCase()} pasa de ${F(it.costo)} a <b>${F(sig.costo)}</b>.`;
+        const degenerada = it.theta === 0 ? ` <span class="nota-degenerada"><b>Iteración degenerada:</b> θ = 0 porque la celda que sale tenía un 0 de degeneración. No se mueve ninguna unidad y el ${palabra.toLowerCase()} se queda igual; solo cambia qué celda cuenta como básica, y eso cambia los u y v para la siguiente vuelta. Es normal que pase varias veces seguidas.</span>` : '';
+        texto = `${max ? 'La celda con el costo reducido más positivo' : 'La celda con el costo reducido más negativo'} es <b>${U.esc(r.filas[e.i])} → ${U.esc(r.cols[e.j])}</b> (${e.r > 0 ? '+' : ''}${F(e.r)}): por cada unidad que se mande ahí, el ${palabra.toLowerCase()} ${max ? 'sube' : 'baja'} ${F(Math.abs(e.r))}. Se arma el ciclo ${ciclo}. θ = <b>${F(it.theta)}</b> (el menor de las celdas con −). Sale ${U.esc(r.filas[it.sale.i])} → ${U.esc(r.cols[it.sale.j])}. ${it.theta === 0 ? `El ${palabra.toLowerCase()} se queda en <b>${F(sig.costo)}</b>.` : `El ${palabra.toLowerCase()} pasa de ${F(it.costo)} a <b>${F(sig.costo)}</b>.`}${degenerada}`;
       }
       return `<div class="paso">
-        <h4><span class="num">${k + 1}</span>${it.optimo ? 'Comprobación final' : `Iteración ${k + 1}`} · ${palabra.toLowerCase()} ${F(it.costo)} ${it.optimo ? '<span class="etiqueta-c verde">óptima</span>' : ''}</h4>
+        <h4><span class="num">${k + 1}</span>${it.optimo ? 'Comprobación final' : `Iteración ${k + 1}`} · ${palabra.toLowerCase()} ${F(it.costo)} ${it.optimo ? '<span class="etiqueta-c verde">óptima</span>' : it.theta === 0 ? '<span class="etiqueta-c violeta">θ = 0 · sin cambio</span>' : ''}</h4>
         <p>${texto}</p>
         ${tablaModi(r, it)}
       </div>`;
@@ -308,7 +332,7 @@ const Northwest = (() => {
             <div class="etiqueta-cifra">${max ? 'Ganancia máxima' : 'Costo mínimo'}</div>
             <div class="cifra verde">${F(r.costoFinal)}</div>
           </div>
-          <span class="insignia verde"><span class="material-symbols-rounded">check</span>${mejoras ? `Óptimo en ${mejoras} ${mejoras === 1 ? 'mejora' : 'mejoras'}` : 'La inicial ya era óptima'}</span>
+          <span class="insignia verde"><span class="material-symbols-rounded">check</span>${mejoras ? `Óptimo en ${mejoras} ${mejoras === 1 ? 'mejora' : 'mejoras'}` : 'La inicial ya era óptima'}${degeneradas ? ` (+${degeneradas} sin cambio)` : ''}</span>
         </div>
         <div class="contadores">
           <div class="contador-c ambar"><small>Esquina noroeste</small><b>${F(r.costoInicial)}</b></div>
@@ -319,6 +343,7 @@ const Northwest = (() => {
         <h3>Envíos de la solución óptima</h3>
         <div class="chips">${envios.join('')}</div>
         <p class="explicacion">${palabra} total = ${formulaCosto(r, r.final)}</p>
+        ${comparacion}
       </div>
       <div class="tarjeta">
         <span class="sobretitulo">Paso 1</span>
@@ -331,6 +356,8 @@ const Northwest = (() => {
           <span><i class="sw sw-trama"></i>Fila o columna agotada</span>
           ${r.balanceo.tipo ? '<span><i class="sw sw-violeta-borde"></i>Ficticia</span>' : ''}
         </div>
+        <div class="aviso-c c-consejo"><span class="material-symbols-rounded">lightbulb</span><div><b>Esta tabla es igual al minimizar y al maximizar</b><p>La esquina noroeste no usa los costos, así que el objetivo todavía no importa aquí. El objetivo empieza a contar en el Paso 2.</p></div></div>
+        ${avisoDeg}
         <div id="n-anim"></div>
         <div id="n-repro"></div>
         <div class="narracion" id="n-narr"></div>
@@ -361,6 +388,8 @@ const Northwest = (() => {
     if (e) return error(e);
     const r = Algoritmos.transporte(C, of, de, N.objetivo, N.filas, N.columnas);
     if (r.error) return error(r.error);
+    const otra = Algoritmos.transporte(C, of, de, N.objetivo === 'max' ? 'min' : 'max', N.filas, N.columnas);
+    r.otra = otra.error ? null : otra;
     sol = r;
     const res = $('#n-resultado');
     res.classList.remove('obsoleto');
