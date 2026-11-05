@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Aprende qué es un algoritmo, dibuja grafos y resuelve el método de asignación y el algoritmo de Johnson paso a paso.">
+<meta name="description" content="Aprende algoritmos paso a paso: grafos, asignación, Johnson, transporte (Northwest), ordenamiento y árboles binarios, con guías y animaciones.">
 <meta name="theme-color" content="#111111">
 <title>GrafoLab · Grafos y Algoritmos</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,12 +27,33 @@
   </a>
   <nav class="nav">
     <a href="#inicio" data-ir="inicio" data-ruta="inicio"><span class="material-symbols-rounded">home</span><span>Inicio</span></a>
-    <a href="#introduccion" data-ir="introduccion" data-ruta="introduccion"><span class="material-symbols-rounded">school</span><span class="largo">Introducción</span><span class="corto">Intro</span></a>
+    <a href="#introduccion" data-ir="introduccion" data-ruta="introduccion"><span class="material-symbols-rounded">school</span><span>Introducción</span></a>
     <a href="#grafos" data-ir="grafos" data-ruta="grafos"><span class="material-symbols-rounded">share</span><span>Grafos</span></a>
     <a href="#asignacion" data-ir="asignacion" data-ruta="asignacion"><span class="material-symbols-rounded">assignment_ind</span><span>Asignación</span></a>
     <a href="#johnson" data-ir="johnson" data-ruta="johnson"><span class="material-symbols-rounded">route</span><span>Johnson</span></a>
+    <a href="#northwest" data-ir="northwest" data-ruta="northwest"><span class="material-symbols-rounded">local_shipping</span><span>Northwest</span></a>
+    <a href="#sort" data-ir="sort" data-ruta="sort"><span class="material-symbols-rounded">bar_chart</span><span>Sort</span></a>
+    <a href="#arboles" data-ir="arboles" data-ruta="arboles"><span class="material-symbols-rounded">account_tree</span><span>Árboles</span></a>
   </nav>
 </header>
+
+<nav class="nav-movil" aria-label="Navegación">
+  <a href="#inicio" data-ir="inicio" data-ruta="inicio"><span class="material-symbols-rounded">home</span><span>Inicio</span></a>
+  <a href="#introduccion" data-ir="introduccion" data-ruta="introduccion"><span class="material-symbols-rounded">school</span><span>Intro</span></a>
+  <a href="#grafos" data-ir="grafos" data-ruta="grafos"><span class="material-symbols-rounded">share</span><span>Grafos</span></a>
+  <button type="button" data-menu id="boton-algoritmos"><span class="material-symbols-rounded">apps</span><span>Algoritmos</span></button>
+</nav>
+
+<div class="menu-hoja" id="menu-hoja" role="dialog" aria-label="Algoritmos">
+  <div class="hoja">
+    <h3>Algoritmos</h3>
+    <a href="#asignacion" data-ir="asignacion" data-ruta="asignacion"><span class="material-symbols-rounded">assignment_ind</span><div><b>Asignación</b><small>Repartir tareas al menor costo</small></div></a>
+    <a href="#johnson" data-ir="johnson" data-ruta="johnson"><span class="material-symbols-rounded">route</span><div><b>Johnson</b><small>Ruta crítica de un proyecto</small></div></a>
+    <a href="#northwest" data-ir="northwest" data-ruta="northwest"><span class="material-symbols-rounded">local_shipping</span><div><b>Northwest</b><small>Transporte con oferta y demanda</small></div></a>
+    <a href="#sort" data-ir="sort" data-ruta="sort"><span class="material-symbols-rounded">bar_chart</span><div><b>Sort</b><small>Ver cómo se ordena una lista</small></div></a>
+    <a href="#arboles" data-ir="arboles" data-ruta="arboles"><span class="material-symbols-rounded">account_tree</span><div><b>Árboles</b><small>Árboles binarios y recorridos</small></div></a>
+  </div>
+</div>
 
 <main>
 
@@ -41,7 +62,7 @@
       <div class="hero-texto">
         <span class="eyebrow"><span class="material-symbols-rounded">school</span>Análisis de Algoritmos · UCB</span>
         <h1>Grafos y algoritmos, explicados desde cero.</h1>
-        <p>Una página para aprender y practicar: qué es un algoritmo, cómo se dibuja un grafo y cómo se resuelven problemas de asignación y de planificación con el algoritmo de Johnson, paso a paso, desde la computadora o el celular.</p>
+        <p>Una página para aprender y practicar: qué es un algoritmo, cómo se dibuja un grafo, cómo se resuelven problemas de asignación, planificación y transporte, cómo ordenan los algoritmos de ordenamiento y cómo funcionan los árboles binarios. Todo con guías, colores y animaciones paso a paso.</p>
         <div class="hero-acciones">
           <a class="btn claro grande" href="#introduccion" data-ir="introduccion"><span class="material-symbols-rounded">school</span>Empezar por la introducción</a>
           <a class="btn fantasma grande" href="#grafos" data-ir="grafos"><span class="material-symbols-rounded">hub</span>Ir a Grafos</a>
@@ -97,6 +118,27 @@
         <p>Planifica un proyecto: calcula los tiempos más tempranos y más tardíos de cada evento, las holguras y la ruta crítica.</p>
         <span class="ir">Abrir <span class="material-symbols-rounded">arrow_forward</span></span>
       </a>
+      <a class="funcion enlace" href="#northwest" data-ir="northwest">
+        <span class="etiqueta-c violeta">Nuevo</span>
+        <div class="icono"><span class="material-symbols-rounded">local_shipping</span></div>
+        <h3>Northwest</h3>
+        <p>Problemas de transporte con oferta y demanda: solución inicial por la esquina noroeste, animada celda por celda, y optimización hasta el costo mínimo.</p>
+        <span class="ir">Abrir <span class="material-symbols-rounded">arrow_forward</span></span>
+      </a>
+      <a class="funcion enlace" href="#sort" data-ir="sort">
+        <span class="etiqueta-c violeta">Nuevo</span>
+        <div class="icono"><span class="material-symbols-rounded">bar_chart</span></div>
+        <h3>Sort</h3>
+        <p>Seis algoritmos de ordenamiento animados barra por barra, con pseudocódigo, contadores de comparaciones y su complejidad.</p>
+        <span class="ir">Abrir <span class="material-symbols-rounded">arrow_forward</span></span>
+      </a>
+      <a class="funcion enlace" href="#arboles" data-ir="arboles">
+        <span class="etiqueta-c violeta">Nuevo</span>
+        <div class="icono"><span class="material-symbols-rounded">account_tree</span></div>
+        <h3>Árboles</h3>
+        <p>Árboles binarios de búsqueda: inserta, busca y elimina con animación, recorre en cuatro órdenes y reconstruye un árbol desde sus recorridos.</p>
+        <span class="ir">Abrir <span class="material-symbols-rounded">arrow_forward</span></span>
+      </a>
       <article class="funcion">
         <div class="icono"><span class="material-symbols-rounded">sync_alt</span></div>
         <h3>Matriz ⇄ Grafo</h3>
@@ -107,6 +149,63 @@
         <h3>Guarda tu trabajo</h3>
         <p>Descarga lo que hagas como archivo .json para abrirlo después, o exporta tu grafo como imagen PNG.</p>
       </article>
+    </div>
+
+    <h2 class="titulo-seccion">Guías</h2>
+    <div class="tarjeta">
+      <p class="lead" style="margin-top:0">Cada pantalla tiene una <b>Guía</b> que explica para qué sirve, cómo se usa y qué significa cada color, y un <b>Recorrido guiado</b> que te señala cada botón en la pantalla, paso a paso.</p>
+      <div class="lista-guias">
+        <div class="guia-item">
+          <span class="material-symbols-rounded">school</span>
+          <b>Introducción</b>
+          <button type="button" class="btn tonal" data-abrir-guia="introduccion" aria-label="Guía de Introducción"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+          <button type="button" class="btn texto" data-abrir-recorrido="introduccion" aria-label="Recorrido guiado de Introducción"><span class="material-symbols-rounded">tour</span></button>
+        </div>
+        <div class="guia-item">
+          <span class="material-symbols-rounded">hub</span>
+          <b>Grafos</b>
+          <button type="button" class="btn tonal" data-abrir-guia="grafos" aria-label="Guía de Grafos"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+          <button type="button" class="btn texto" data-abrir-recorrido="grafos" aria-label="Recorrido guiado de Grafos"><span class="material-symbols-rounded">tour</span></button>
+        </div>
+        <div class="guia-item">
+          <span class="material-symbols-rounded">assignment_ind</span>
+          <b>Asignación</b>
+          <button type="button" class="btn tonal" data-abrir-guia="asignacion" aria-label="Guía de Asignación"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+          <button type="button" class="btn texto" data-abrir-recorrido="asignacion" aria-label="Recorrido guiado de Asignación"><span class="material-symbols-rounded">tour</span></button>
+        </div>
+        <div class="guia-item">
+          <span class="material-symbols-rounded">route</span>
+          <b>Johnson</b>
+          <button type="button" class="btn tonal" data-abrir-guia="johnson" aria-label="Guía de Johnson"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+          <button type="button" class="btn texto" data-abrir-recorrido="johnson" aria-label="Recorrido guiado de Johnson"><span class="material-symbols-rounded">tour</span></button>
+        </div>
+        <div class="guia-item">
+          <span class="material-symbols-rounded">local_shipping</span>
+          <b>Northwest</b>
+          <button type="button" class="btn tonal" data-abrir-guia="northwest" aria-label="Guía de Northwest"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+          <button type="button" class="btn texto" data-abrir-recorrido="northwest" aria-label="Recorrido guiado de Northwest"><span class="material-symbols-rounded">tour</span></button>
+        </div>
+        <div class="guia-item">
+          <span class="material-symbols-rounded">bar_chart</span>
+          <b>Sort</b>
+          <button type="button" class="btn tonal" data-abrir-guia="sort" aria-label="Guía de Sort"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+          <button type="button" class="btn texto" data-abrir-recorrido="sort" aria-label="Recorrido guiado de Sort"><span class="material-symbols-rounded">tour</span></button>
+        </div>
+        <div class="guia-item">
+          <span class="material-symbols-rounded">account_tree</span>
+          <b>Árboles</b>
+          <button type="button" class="btn tonal" data-abrir-guia="arboles" aria-label="Guía de Árboles"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+          <button type="button" class="btn texto" data-abrir-recorrido="arboles" aria-label="Recorrido guiado de Árboles"><span class="material-symbols-rounded">tour</span></button>
+        </div>
+      </div>
+      <h3>Los colores siempre significan lo mismo</h3>
+      <div class="colores-globales">
+        <div><i class="sw sw-verde"></i><b>Verde</b><span>Resultado, respuesta correcta o algo ya terminado</span></div>
+        <div><i class="sw sw-ambar"></i><b>Ámbar</b><span>Lo que se está revisando en este momento</span></div>
+        <div><i class="sw sw-azul"></i><b>Azul</b><span>Información, camino recorrido o datos de entrada</span></div>
+        <div><i class="sw sw-rojo"></i><b>Rojo</b><span>Crítico, intercambio o error</span></div>
+        <div><i class="sw sw-violeta"></i><b>Violeta</b><span>Algo especial: ficticias, pivotes o preguntas</span></div>
+      </div>
     </div>
 
     <h2 class="titulo-seccion">Cómo usar la página</h2>
@@ -122,7 +221,7 @@
         <span class="numero">2</span>
         <div>
           <h3>Elige una pantalla</h3>
-          <p>Cada pantalla empieza con una explicación corta del tema y trae un ejemplo listo para probar.</p>
+          <p>Cada pantalla empieza con una explicación del tema, trae un ejemplo listo y tiene su Guía y su Recorrido guiado.</p>
         </div>
       </div>
       <div class="paso-inicio">
@@ -156,8 +255,14 @@
 
   <section id="v-introduccion" class="vista">
     <div class="encabezado-vista">
-      <h1>Introducción</h1>
-      <p>Si es tu primera vez con estos temas, empieza aquí. En unos minutos sabrás qué es un algoritmo, para qué sirve y cómo se mide si es rápido o lento.</p>
+      <div>
+        <h1>Introducción</h1>
+        <p>Si es tu primera vez con estos temas, empieza aquí. En unos minutos sabrás qué es un algoritmo, para qué sirve y cómo se mide si es rápido o lento.</p>
+      </div>
+      <div class="encabezado-acciones">
+        <button type="button" class="btn tonal" data-guia="introduccion"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+        <button type="button" class="btn contorno" data-recorrido="introduccion"><span class="material-symbols-rounded">tour</span>Recorrido guiado</button>
+      </div>
     </div>
 
     <div class="indice">
@@ -172,6 +277,7 @@
       <span class="sobretitulo">1 · Concepto</span>
       <h2>¿Qué es un algoritmo?</h2>
       <p class="lead">Un <b>algoritmo</b> es una lista finita de pasos, en un orden fijo y sin ambigüedad, que toma unos datos de <b>entrada</b> y los convierte en un <b>resultado</b>. Es como una receta de cocina: los ingredientes son la entrada, los pasos son las instrucciones y el plato terminado es la salida.</p>
+      <div class="aviso-c c-info"><span class="material-symbols-rounded">history_edu</span><div><b>Dato curioso</b><p>La palabra «algoritmo» viene del nombre del matemático persa <b>al-Juarismi</b>, que en el siglo IX escribió reglas paso a paso para hacer cálculos.</p></div></div>
       <div class="flujo">
         <div class="flujo-caja"><span class="material-symbols-rounded">login</span><b>Entrada</b><small>Ingredientes · una lista de números</small></div>
         <span class="material-symbols-rounded flujo-flecha">arrow_forward</span>
@@ -238,6 +344,7 @@
         <div class="mini"><span class="material-symbols-rounded">timer</span><h4>Complejidad temporal</h4><p>Cuántas operaciones hace. Buscar el mayor en 5 números toma 4 comparaciones; en 1 000 números, 999.</p></div>
         <div class="mini"><span class="material-symbols-rounded">memory</span><h4>Complejidad espacial</h4><p>Cuánta memoria necesita. Una matriz de adyacencia de 10 nodos guarda 10 × 10 = 100 celdas.</p></div>
       </div>
+      <div class="aviso-c c-clave"><span class="material-symbols-rounded">check_circle</span><div><b>Recuerda</b><p>No importa cuánto tarda con 5 datos, sino <b>cómo crece</b> el trabajo cuando los datos aumentan. Un algoritmo O(n²) puede ser rápido con 10 números y muy lento con un millón.</p></div></div>
       <h3>La notación O grande</h3>
       <p>Se escribe <b>O(…)</b> y describe cómo crece el trabajo en el <b>peor caso</b>, ignorando detalles pequeños. Por ejemplo, O(n) significa que si los datos se duplican, el trabajo también se duplica. Estas son las más comunes, de la más rápida a la más lenta:</p>
       <div class="tabla-scroll"><table class="datos texto">
@@ -324,16 +431,26 @@
       </div>
     </div>
 
+    <div class="tarjeta">
+      <div class="quiz" data-quiz="introduccion" style="margin-top:0"></div>
+    </div>
+
     <div class="siguiente">
-      <p>¿Listo? Sigue con los grafos, la base de las otras dos pantallas.</p>
+      <p>¿Listo? Sigue con los grafos, la base de Asignación y Johnson.</p>
       <a class="btn lleno grande" href="#grafos" data-ir="grafos">Ir a Grafos<span class="material-symbols-rounded">arrow_forward</span></a>
     </div>
   </section>
 
   <section id="v-grafos" class="vista">
     <div class="encabezado-vista">
-      <h1>Grafos</h1>
-      <p>Dibuja un grafo y mira cómo se representa como matriz.</p>
+      <div>
+        <h1>Grafos</h1>
+        <p>Dibuja un grafo y mira cómo se representa como matriz.</p>
+      </div>
+      <div class="encabezado-acciones">
+        <button type="button" class="btn tonal" data-guia="grafos"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+        <button type="button" class="btn contorno" data-recorrido="grafos"><span class="material-symbols-rounded">tour</span>Recorrido guiado</button>
+      </div>
     </div>
 
     <details class="tarjeta aprende" open>
@@ -404,6 +521,11 @@
         <a href="https://www.youtube.com/watch?v=tC1bpr8Zq1A" target="_blank" rel="noopener"><span class="material-symbols-rounded">smart_display</span>Video: Introducción a grafos, formas de representación</a>
         <a href="https://www.youtube.com/watch?v=e6k5na8SSmQ" target="_blank" rel="noopener"><span class="material-symbols-rounded">smart_display</span>Video: Matriz de adyacencia (4 min)</a>
       </div>
+      <div class="avisos-fila">
+        <div class="aviso-c c-consejo"><span class="material-symbols-rounded">tips_and_updates</span><div><b>Consejo</b><p>Al conectar dos nodos, marca «ida y vuelta» para crear las dos flechas de una sola vez.</p></div></div>
+        <div class="aviso-c c-cuidado"><span class="material-symbols-rounded">warning</span><div><b>Cuidado</b><p>Si el grafo tiene un ciclo (por ejemplo A → B → A), no se puede enviar a Johnson. La página te avisa en rojo cuál es.</p></div></div>
+      </div>
+      <div class="quiz" data-quiz="grafos"></div>
     </details>
 
     <div class="tarjeta">
@@ -453,8 +575,14 @@
 
   <section id="v-asignacion" class="vista">
     <div class="encabezado-vista">
-      <h1>Método de asignación</h1>
-      <p>Asigna una tarea a cada agente con el menor costo o el mayor beneficio, usando el método húngaro.</p>
+      <div>
+        <h1>Método de asignación</h1>
+        <p>Asigna una tarea a cada agente con el menor costo o el mayor beneficio, usando el método húngaro.</p>
+      </div>
+      <div class="encabezado-acciones">
+        <button type="button" class="btn tonal" data-guia="asignacion"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+        <button type="button" class="btn contorno" data-recorrido="asignacion"><span class="material-symbols-rounded">tour</span>Recorrido guiado</button>
+      </div>
     </div>
 
     <details class="tarjeta aprende" open>
@@ -474,13 +602,14 @@
         <li>Si no, se busca el <b>menor valor sin tapar</b>, se resta a los no tapados y se suma en los cruces de líneas. Se vuelve al paso 5.</li>
         <li><b>Elegir un cero por fila y por columna.</b> Esa es la asignación óptima.</li>
       </ol>
-      <div class="callout">
-        <span class="material-symbols-rounded">lightbulb</span>
-        <p><b>¿Qué es una fila o columna ficticia?</b> Si hay 4 agentes y 3 tareas, uno de ellos se quedará sin tarea. Para que el método funcione se inventa una «tarea ficticia» con costo 0: el agente que la reciba es el que se queda libre. Lo mismo pasa al revés con un agente ficticio.</p>
+      <div class="avisos-fila">
+        <div class="aviso-c c-especial"><span class="material-symbols-rounded">auto_awesome</span><div><b>¿Qué es una fila o columna ficticia?</b><p>Si hay 4 agentes y 3 tareas, uno se quedará sin tarea. Para que el método funcione se inventa una «tarea ficticia» con costo 0: el agente que la reciba es el que queda libre. Lo mismo pasa al revés con un agente ficticio.</p></div></div>
+        <div class="aviso-c c-info"><span class="material-symbols-rounded">palette</span><div><b>Colores del paso a paso</b><p><b style="color:var(--ambar-t)">Ámbar</b>: ceros. <b style="color:var(--azul-t)">Azul</b>: líneas que tapan ceros. <b style="color:var(--verde-t)">Verde</b>: la asignación elegida. <b style="color:var(--violeta-t)">Violeta</b>: ficticias.</p></div></div>
       </div>
       <div class="videos-chicos">
         <a href="https://www.youtube.com/watch?v=_XvIC2KvWvo" target="_blank" rel="noopener"><span class="material-symbols-rounded">smart_display</span>Video: Método húngaro, ejercicio resuelto (18 min)</a>
       </div>
+      <div class="quiz" data-quiz="asignacion"></div>
     </details>
 
     <div class="tarjeta" id="a-entrada">
@@ -534,8 +663,14 @@
 
   <section id="v-johnson" class="vista">
     <div class="encabezado-vista">
-      <h1>Algoritmo de Johnson</h1>
-      <p>Encuentra la ruta crítica de una red de actividades: tiempos más tempranos, más tardíos y holguras.</p>
+      <div>
+        <h1>Algoritmo de Johnson</h1>
+        <p>Encuentra la ruta crítica de una red de actividades: tiempos más tempranos, más tardíos y holguras.</p>
+      </div>
+      <div class="encabezado-acciones">
+        <button type="button" class="btn tonal" data-guia="johnson"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+        <button type="button" class="btn contorno" data-recorrido="johnson"><span class="material-symbols-rounded">tour</span>Recorrido guiado</button>
+      </div>
     </div>
 
     <details class="tarjeta aprende" open>
@@ -549,13 +684,14 @@
       </div>
       <h3>¿Por qué se toma el máximo en la ida?</h3>
       <p>Un evento solo ocurre cuando terminan <b>todas</b> las actividades que llegan a él. Si a un nodo llegan una actividad que termina en el día 8 y otra que termina en el día 9, el evento ocurre recién el día 9. Por eso, para la ruta crítica se <b>maximiza</b>. Si eliges <b>minimizar</b>, el mismo procedimiento con mínimos encuentra el camino más corto desde el inicio hasta el final.</p>
-      <div class="callout">
-        <span class="material-symbols-rounded">lightbulb</span>
-        <p><b>Reglas de la red:</b> las flechas siempre avanzan, así que no puede haber <b>bucles</b> (un nodo hacia sí mismo) ni <b>ciclos</b> (un camino que vuelve a un nodo por el que ya pasó). El algoritmo recorre cada nodo y cada actividad dos veces, así que es O(V + E).</p>
+      <div class="avisos-fila">
+        <div class="aviso-c c-cuidado"><span class="material-symbols-rounded">warning</span><div><b>Reglas de la red</b><p>Las flechas siempre avanzan: no puede haber <b>bucles</b> (un nodo hacia sí mismo) ni <b>ciclos</b> (un camino que vuelve a un nodo por el que ya pasó).</p></div></div>
+        <div class="aviso-c c-especial"><span class="material-symbols-rounded">play_circle</span><div><b>Míralo animado</b><p>Después de resolver, usa «Ver animación de ida y vuelta»: verás en la red cómo se calcula cada TE y cada TL, y la ruta crítica aparece en <b style="color:var(--rojo-t)">rojo</b>.</p></div></div>
       </div>
       <div class="videos-chicos">
         <a href="https://www.youtube.com/watch?v=AeNQ68kvZvU" target="_blank" rel="noopener"><span class="material-symbols-rounded">smart_display</span>Video: Método de la ruta crítica, teoría y ejemplos (18 min)</a>
       </div>
+      <div class="quiz" data-quiz="johnson"></div>
     </details>
 
     <div class="tarjeta" id="j-entrada">
@@ -579,6 +715,15 @@
       <div id="j-panel-grafo">
         <p class="ayuda"><span class="material-symbols-rounded">info</span><span>Cada flecha es una actividad y su peso es la duración. Ya hay un ejemplo cargado: presiona «Resolver» para verlo.</span></p>
         <div id="j-editor" class="editor"></div>
+        <div id="j-anim" hidden>
+          <div class="leyenda-c">
+            <span><i class="sw sw-ambar"></i>Evento que se calcula</span>
+            <span><i class="sw sw-azul"></i>Flechas usadas y eventos ya calculados</span>
+            <span><i class="sw sw-rojo"></i>Ruta crítica</span>
+          </div>
+          <div id="j-repro"></div>
+          <div class="narracion" id="j-narr"></div>
+        </div>
       </div>
 
       <div id="j-panel-matriz" hidden>
@@ -605,6 +750,332 @@
     <div id="j-resultado" class="resultado"></div>
   </section>
 
+  <section id="v-northwest" class="vista">
+    <div class="encabezado-vista">
+      <div>
+        <h1>Northwest · problema de transporte</h1>
+        <p>Reparte la oferta de varios orígenes entre varios destinos con el método de la esquina noroeste, y después mejora la solución hasta el óptimo.</p>
+      </div>
+      <div class="encabezado-acciones">
+        <button type="button" class="btn tonal" data-guia="northwest"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+        <button type="button" class="btn contorno" data-recorrido="northwest"><span class="material-symbols-rounded">tour</span>Recorrido guiado</button>
+      </div>
+    </div>
+
+    <details class="tarjeta aprende" open>
+      <summary><span class="material-symbols-rounded">menu_book</span><span>¿Qué es el problema de transporte?</span><span class="material-symbols-rounded flecha">expand_more</span></summary>
+      <p class="lead">Hay varios <b>orígenes</b> (fábricas, almacenes) que tienen una cantidad para entregar, llamada <b>oferta</b>, y varios <b>destinos</b> (tiendas, ciudades) que necesitan una cantidad, llamada <b>demanda</b>. Enviar una unidad por cada ruta tiene un <b>costo</b>. Hay que decidir cuánto mandar por cada ruta para cubrir todo al menor costo.</p>
+      <div class="conceptos">
+        <div class="concepto texto"><b class="sigla" style="background:var(--azul)">O</b><h4>Oferta</h4><p>Lo que tiene cada origen para enviar. Va en la última columna.</p></div>
+        <div class="concepto texto"><b class="sigla" style="background:var(--azul)">D</b><h4>Demanda</h4><p>Lo que necesita cada destino. Va en la última fila.</p></div>
+        <div class="concepto texto"><b class="sigla">c</b><h4>Costo unitario</h4><p>Lo que cuesta mandar una unidad por esa ruta. Mandar 10 unidades a costo 6 cuesta 60.</p></div>
+        <div class="concepto texto"><b class="sigla" style="background:var(--verde)">Σ</b><h4>Balance</h4><p>Si la oferta total es igual a la demanda total, el problema está balanceado.</p></div>
+        <div class="concepto texto"><b class="sigla" style="background:var(--violeta)">F</b><h4>Ficticia</h4><p>Si no hay balance, se agrega un origen o destino inventado con costo 0 que absorbe la diferencia.</p></div>
+      </div>
+
+      <h3>El método de la esquina noroeste</h3>
+      <div class="ejemplo-matriz">
+        <svg class="ilus-nw" viewBox="0 0 340 190" aria-hidden="true">
+          <g font-family="Roboto Mono, monospace" font-size="13" font-weight="600">
+            <g fill="#f1f1f1">
+              <rect x="40" y="30" width="62" height="42" rx="10"/><rect x="108" y="30" width="62" height="42" rx="10"/><rect x="176" y="30" width="62" height="42" rx="10"/><rect x="244" y="30" width="62" height="42" rx="10"/>
+              <rect x="40" y="78" width="62" height="42" rx="10"/><rect x="108" y="78" width="62" height="42" rx="10"/><rect x="176" y="78" width="62" height="42" rx="10"/><rect x="244" y="78" width="62" height="42" rx="10"/>
+              <rect x="40" y="126" width="62" height="42" rx="10"/><rect x="108" y="126" width="62" height="42" rx="10"/><rect x="176" y="126" width="62" height="42" rx="10"/><rect x="244" y="126" width="62" height="42" rx="10"/>
+            </g>
+            <g fill="#2563eb">
+              <rect x="40" y="30" width="62" height="42" rx="10"/><rect x="40" y="78" width="62" height="42" rx="10"/><rect x="108" y="78" width="62" height="42" rx="10"/><rect x="176" y="78" width="62" height="42" rx="10"/><rect x="176" y="126" width="62" height="42" rx="10"/><rect x="244" y="126" width="62" height="42" rx="10"/>
+            </g>
+            <polyline points="54,44 54,92 122,92 190,92 190,140 258,140" fill="none" stroke="#f5a524" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <g fill="#f5a524"><circle cx="54" cy="44" r="5"/><circle cx="54" cy="92" r="3.5"/><circle cx="122" cy="92" r="3.5"/><circle cx="190" cy="92" r="3.5"/><circle cx="190" cy="140" r="3.5"/><circle cx="258" cy="140" r="5"/></g>
+            <g fill="#fff" text-anchor="end">
+              <text x="94" y="64">35</text><text x="94" y="112">10</text><text x="162" y="112">20</text><text x="230" y="112">20</text><text x="230" y="160">10</text><text x="298" y="160">30</text>
+            </g>
+            <g fill="#8c8c8c" font-size="11" font-family="Roboto Flex, sans-serif" text-anchor="middle">
+              <text x="71" y="20">D1</text><text x="139" y="20">D2</text><text x="207" y="20">D3</text><text x="275" y="20">D4</text>
+              <text x="20" y="55">O1</text><text x="20" y="103">O2</text><text x="20" y="151">O3</text>
+            </g>
+          </g>
+        </svg>
+        <div>
+          <ol class="pasos-lista">
+            <li>Empieza en la celda de <b>arriba a la izquierda</b> (el «noroeste» del mapa).</li>
+            <li>Manda ahí lo máximo posible: el <b>menor</b> entre la oferta que le queda a esa fila y la demanda que le falta a esa columna.</li>
+            <li>Si se cubrió la demanda, pasa a la <b>derecha</b>; si se acabó la oferta, pasa <b>abajo</b>.</li>
+            <li>Repite hasta llegar a la esquina de abajo a la derecha.</li>
+          </ol>
+          <p class="ayuda" style="margin-top:10px"><span class="material-symbols-rounded">route</span><span>La línea <b style="color:var(--ambar-t)">ámbar</b> muestra el orden en que se llenan las celdas en el ejemplo de esta pantalla.</span></p>
+        </div>
+      </div>
+      <div class="avisos-fila">
+        <div class="aviso-c c-consejo"><span class="material-symbols-rounded">tips_and_updates</span><div><b>No mira los costos</b><p>La esquina noroeste es rápida y siempre da una solución válida, pero casi nunca la más barata. Por eso después se mejora con el <b>método MODI</b>.</p></div></div>
+        <div class="aviso-c c-clave"><span class="material-symbols-rounded">check_circle</span><div><b>Recuerda</b><p>Una solución básica tiene exactamente <b>m + n − 1</b> celdas con envío (m orígenes y n destinos). Con 3 y 4, son 6.</p></div></div>
+        <div class="aviso-c c-especial"><span class="material-symbols-rounded">auto_awesome</span><div><b>Degeneración</b><p>Si una fila y una columna se agotan a la vez, se anota un <b>0</b> en la celda siguiente para no perder la cuenta de m + n − 1.</p></div></div>
+      </div>
+      <div class="quiz" data-quiz="northwest"></div>
+    </details>
+
+    <div class="tarjeta" id="n-entrada">
+      <div class="fila-controles">
+        <div class="campo-seg">
+          <span>Objetivo</span>
+          <div class="segmentado" id="n-objetivo">
+            <button type="button" data-valor="min"><span class="material-symbols-rounded">south</span>Minimizar costo</button>
+            <button type="button" data-valor="max"><span class="material-symbols-rounded">north</span>Maximizar ganancia</button>
+          </div>
+        </div>
+      </div>
+      <div class="fila-controles" id="n-tamano">
+        <label class="campo compacto"><span>Orígenes</span><input type="number" id="n-filas" min="1" max="8" inputmode="numeric"></label>
+        <label class="campo compacto"><span>Destinos</span><input type="number" id="n-columnas" min="1" max="8" inputmode="numeric"></label>
+        <button type="button" class="btn tonal" id="n-aplicar-tam"><span class="material-symbols-rounded">aspect_ratio</span>Aplicar tamaño</button>
+        <button type="button" class="btn tonal" id="n-ejemplo"><span class="material-symbols-rounded">lightbulb</span>Ejemplo</button>
+        <button type="button" class="btn tonal" id="n-aleatorio"><span class="material-symbols-rounded">casino</span>Aleatorio</button>
+        <button type="button" class="btn tonal" id="n-limpiar"><span class="material-symbols-rounded">backspace</span>Limpiar</button>
+      </div>
+      <p class="ayuda"><span class="material-symbols-rounded">info</span><span>Cada celda es el costo de enviar una unidad. La columna azul es la <b>oferta</b> de cada origen y la fila azul la <b>demanda</b> de cada destino. Puedes cambiar los nombres.</span></p>
+      <p class="nota" id="n-nota" hidden></p>
+      <div class="tabla-scroll"><table class="matriz tabla-nw" id="n-tabla"></table></div>
+      <div id="n-balance"></div>
+      <div class="acciones separadas">
+        <button type="button" class="btn lleno grande" id="n-resolver"><span class="material-symbols-rounded">play_arrow</span>Resolver</button>
+        <span class="espacio"></span>
+        <button type="button" class="btn contorno" id="n-guardar"><span class="material-symbols-rounded">download</span>Guardar</button>
+        <button type="button" class="btn contorno" id="n-abrir"><span class="material-symbols-rounded">folder_open</span>Abrir</button>
+      </div>
+    </div>
+
+    <div id="n-resultado" class="resultado"></div>
+  </section>
+
+  <section id="v-sort" class="vista">
+    <div class="encabezado-vista">
+      <div>
+        <h1>Ordenamiento (Sort)</h1>
+        <p>Mira, barra por barra, cómo seis algoritmos ordenan la misma lista y compara cuánto trabaja cada uno.</p>
+      </div>
+      <div class="encabezado-acciones">
+        <button type="button" class="btn tonal" data-guia="sort"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+        <button type="button" class="btn contorno" data-recorrido="sort"><span class="material-symbols-rounded">tour</span>Recorrido guiado</button>
+      </div>
+    </div>
+
+    <details class="tarjeta aprende" open>
+      <summary><span class="material-symbols-rounded">menu_book</span><span>¿Qué es ordenar y por qué hay tantas formas?</span><span class="material-symbols-rounded flecha">expand_more</span></summary>
+      <p class="lead"><b>Ordenar</b> es acomodar una lista de menor a mayor (o al revés). Todos los algoritmos llegan al mismo resultado, pero <b>hacen distinta cantidad de trabajo</b>: algunos comparan todos contra todos y otros dividen el problema en partes más pequeñas.</p>
+      <div class="ejemplo-matriz">
+        <svg class="ilus" viewBox="0 0 300 110" aria-hidden="true">
+          <g fill="#cfcfcf">
+            <rect x="10" y="40" width="16" height="50" rx="4"/><rect x="30" y="20" width="16" height="70" rx="4"/><rect x="50" y="62" width="16" height="28" rx="4"/><rect x="70" y="30" width="16" height="60" rx="4"/><rect x="90" y="52" width="16" height="38" rx="4"/><rect x="110" y="10" width="16" height="80" rx="4"/>
+          </g>
+          <path d="M140 55 H168" stroke="#111" stroke-width="2.5" marker-end="url(#ilus-flecha)"/>
+          <g fill="#16a34a">
+            <rect x="180" y="62" width="16" height="28" rx="4"/><rect x="200" y="52" width="16" height="38" rx="4"/><rect x="220" y="40" width="16" height="50" rx="4"/><rect x="240" y="30" width="16" height="60" rx="4"/><rect x="260" y="20" width="16" height="70" rx="4"/><rect x="280" y="10" width="16" height="80" rx="4"/>
+          </g>
+          <g font-family="Roboto Flex, sans-serif" font-size="11" fill="#8c8c8c" text-anchor="middle"><text x="68" y="106">Desordenada</text><text x="238" y="106">Ordenada</text></g>
+        </svg>
+        <div>
+          <p>En la animación, cada número es una <b>barra</b>: cuanto más alta, más grande. Los colores dicen qué hace el algoritmo en cada momento:</p>
+          <div class="leyenda-c">
+            <span><i class="sw sw-ambar"></i>Comparando</span>
+            <span><i class="sw sw-rojo"></i>Intercambiando</span>
+            <span><i class="sw sw-verde"></i>En su lugar final</span>
+            <span><i class="sw sw-violeta"></i>Pivote (Quick)</span>
+            <span><i class="sw sw-azul"></i>Elemento marcado</span>
+            <span><i class="sw sw-verde-s"></i>Parte ya ordenada</span>
+          </div>
+        </div>
+      </div>
+      <h3>Los seis algoritmos de un vistazo</h3>
+      <div class="tabla-scroll"><table class="datos texto">
+        <thead><tr><th>Algoritmo</th><th>Idea en una frase</th><th>Mejor</th><th>Promedio</th><th>Peor</th><th>Estable</th></tr></thead>
+        <tbody>
+          <tr><td>Burbuja</td><td>Intercambia vecinos que están al revés; el mayor «sube» al final.</td><td><span class="etiqueta-c verde">O(n)</span></td><td><span class="etiqueta-c rojo">O(n²)</span></td><td><span class="etiqueta-c rojo">O(n²)</span></td><td>Sí</td></tr>
+          <tr><td>Selección</td><td>Busca el menor y lo pone al principio; repite con el resto.</td><td><span class="etiqueta-c rojo">O(n²)</span></td><td><span class="etiqueta-c rojo">O(n²)</span></td><td><span class="etiqueta-c rojo">O(n²)</span></td><td>No</td></tr>
+          <tr><td>Inserción</td><td>Toma cada número y lo desliza hasta su lugar, como cartas en la mano.</td><td><span class="etiqueta-c verde">O(n)</span></td><td><span class="etiqueta-c rojo">O(n²)</span></td><td><span class="etiqueta-c rojo">O(n²)</span></td><td>Sí</td></tr>
+          <tr><td>Shell</td><td>Inserción con saltos que se achican: primero lejos, luego cerca.</td><td><span class="etiqueta-c verde">O(n log n)</span></td><td><span class="etiqueta-c ambar">≈ O(n^1,5)</span></td><td><span class="etiqueta-c rojo">O(n²)</span></td><td>No</td></tr>
+          <tr><td>Merge</td><td>Divide en mitades hasta tener números sueltos y los mezcla en orden.</td><td><span class="etiqueta-c verde">O(n log n)</span></td><td><span class="etiqueta-c verde">O(n log n)</span></td><td><span class="etiqueta-c verde">O(n log n)</span></td><td>Sí</td></tr>
+          <tr><td>Quick</td><td>Elige un pivote, pone los menores a un lado y los mayores al otro.</td><td><span class="etiqueta-c verde">O(n log n)</span></td><td><span class="etiqueta-c verde">O(n log n)</span></td><td><span class="etiqueta-c rojo">O(n²)</span></td><td>No</td></tr>
+        </tbody>
+      </table></div>
+      <div class="avisos-fila">
+        <div class="aviso-c c-info"><span class="material-symbols-rounded">info</span><div><b>¿Qué es «estable»?</b><p>Que si hay dos números iguales, quedan en el mismo orden en que estaban. Importa al ordenar, por ejemplo, alumnos por nota sin desordenar los que empatan.</p></div></div>
+        <div class="aviso-c c-consejo"><span class="material-symbols-rounded">tips_and_updates</span><div><b>Pruébalo</b><p>Ordena la misma lista con Burbuja y con Quick, y compara el contador de comparaciones: con 20 números la diferencia ya se nota.</p></div></div>
+      </div>
+      <div class="quiz" data-quiz="sort"></div>
+    </details>
+
+    <div class="tarjeta" id="s-entrada">
+      <div class="fila-controles">
+        <div class="campo-seg">
+          <span>Algoritmo</span>
+          <div class="opciones-alg" id="s-algoritmos">
+            <button type="button" data-valor="burbuja">Burbuja</button>
+            <button type="button" data-valor="seleccion">Selección</button>
+            <button type="button" data-valor="insercion">Inserción</button>
+            <button type="button" data-valor="shell">Shell</button>
+            <button type="button" data-valor="merge">Merge</button>
+            <button type="button" data-valor="quick">Quick</button>
+          </div>
+        </div>
+      </div>
+      <div class="fila-controles">
+        <div class="campo-seg">
+          <span>Orden</span>
+          <div class="segmentado" id="s-orden">
+            <button type="button" data-valor="asc"><span class="material-symbols-rounded">trending_up</span>Menor a mayor</button>
+            <button type="button" data-valor="desc"><span class="material-symbols-rounded">trending_down</span>Mayor a menor</button>
+          </div>
+        </div>
+      </div>
+      <div class="fila-controles" id="s-datos" style="margin-bottom:0">
+        <label class="campo compacto"><span>Cantidad</span><input type="number" id="s-n" min="2" max="30" inputmode="numeric"></label>
+        <button type="button" class="btn tonal" id="s-aleatorio"><span class="material-symbols-rounded">casino</span>Aleatorio</button>
+        <label class="campo ancho"><span>O escribe tus números</span><input type="text" id="s-manual" placeholder="Ej.: 10, 25, 3, 14" autocomplete="off"></label>
+        <button type="button" class="btn tonal" id="s-cargar"><span class="material-symbols-rounded">upload</span>Cargar</button>
+      </div>
+    </div>
+
+    <div class="rejilla-sort">
+      <div class="tarjeta">
+        <div class="titulo-tarjeta"><h2 id="s-titulo"></h2><span class="etiqueta-c" id="s-complej"></span></div>
+        <div class="escenario" id="s-escenario">
+          <div class="barras" id="s-barras"></div>
+          <div class="indices" id="s-indices"></div>
+        </div>
+        <div id="s-repro"></div>
+        <div class="narracion" id="s-narracion"></div>
+        <div class="contadores" id="s-contadores"></div>
+        <div class="acciones separadas">
+          <span class="espacio"></span>
+          <button type="button" class="btn contorno" id="s-guardar"><span class="material-symbols-rounded">download</span>Guardar</button>
+          <button type="button" class="btn contorno" id="s-abrir"><span class="material-symbols-rounded">folder_open</span>Abrir</button>
+        </div>
+      </div>
+      <div class="tarjeta">
+        <h3 style="margin-top:0">Pseudocódigo</h3>
+        <div class="pseudo" id="s-pseudo"></div>
+        <h3>Ficha del algoritmo</h3>
+        <p id="s-idea" style="font-size:14.5px;color:var(--texto-2)"></p>
+        <div class="ficha" id="s-ficha"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="v-arboles" class="vista">
+    <div class="encabezado-vista">
+      <div>
+        <h1>Árboles binarios</h1>
+        <p>Crea un árbol binario de búsqueda, mira sus recorridos animados y reconstruye un árbol a partir de dos recorridos.</p>
+      </div>
+      <div class="encabezado-acciones">
+        <button type="button" class="btn tonal" data-guia="arboles"><span class="material-symbols-rounded">menu_book</span>Guía</button>
+        <button type="button" class="btn contorno" data-recorrido="arboles"><span class="material-symbols-rounded">tour</span>Recorrido guiado</button>
+      </div>
+    </div>
+
+    <details class="tarjeta aprende" open>
+      <summary><span class="material-symbols-rounded">menu_book</span><span>¿Qué es un árbol binario de búsqueda?</span><span class="material-symbols-rounded flecha">expand_more</span></summary>
+      <p class="lead">Un <b>árbol</b> es un grafo con forma de árbol de familia: arriba está la <b>raíz</b> y cada nodo puede tener hijos. Es <b>binario</b> si cada nodo tiene como máximo dos hijos (izquierdo y derecho), y es <b>de búsqueda</b> si cumple una regla: <b>a la izquierda van los menores y a la derecha los mayores</b>.</p>
+      <div class="ejemplo-matriz">
+        <svg class="ilus" viewBox="0 0 300 212" aria-hidden="true">
+          <rect x="10" y="62" width="136" height="146" rx="16" fill="#e8effd"/>
+          <rect x="154" y="62" width="136" height="146" rx="16" fill="#fdf0dc"/>
+          <g stroke="#2b2b2b" stroke-width="2"><line x1="150" y1="30" x2="80" y2="90"/><line x1="150" y1="30" x2="220" y2="90"/><line x1="80" y1="90" x2="45" y2="150"/><line x1="80" y1="90" x2="115" y2="150"/><line x1="220" y1="90" x2="185" y2="150"/><line x1="220" y1="90" x2="255" y2="150"/></g>
+          <g fill="#fff" stroke="#111" stroke-width="2"><circle cx="150" cy="30" r="17" stroke-width="3"/><circle cx="80" cy="90" r="17"/><circle cx="220" cy="90" r="17"/><circle cx="185" cy="150" r="17"/><circle cx="255" cy="150" r="17"/></g>
+          <g fill="#16a34a" stroke="#16a34a" stroke-width="2"><circle cx="45" cy="150" r="17"/><circle cx="115" cy="150" r="17"/></g>
+          <g font-family="Roboto Flex, sans-serif" font-weight="700" font-size="13" text-anchor="middle"><text x="150" y="35">50</text><text x="80" y="95">30</text><text x="220" y="95">70</text><text x="45" y="155" fill="#fff">20</text><text x="115" y="155" fill="#fff">40</text><text x="185" y="155">60</text><text x="255" y="155">80</text></g>
+          <g font-family="Roboto Flex, sans-serif" font-size="11" font-weight="600" text-anchor="middle"><text x="196" y="34" fill="#111">raíz</text><text x="78" y="198" fill="#1d4fc4">menores que 50</text><text x="222" y="198" fill="#a35603">mayores que 50</text><text x="80" y="181" fill="#11803a">hojas</text></g>
+        </svg>
+        <div>
+          <div class="conceptos" style="margin-top:0;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
+            <div class="concepto texto"><h4>Raíz</h4><p>El nodo de arriba, sin padre.</p></div>
+            <div class="concepto texto"><h4>Hoja</h4><p>Un nodo sin hijos (en verde).</p></div>
+            <div class="concepto texto"><h4>Altura</h4><p>Cantidad de pisos. Este árbol tiene altura 3.</p></div>
+            <div class="concepto texto"><h4>Subárbol</h4><p>Un nodo con todos sus descendientes.</p></div>
+          </div>
+        </div>
+      </div>
+      <h3>Los cuatro recorridos</h3>
+      <p>Recorrer es visitar todos los nodos en algún orden. Con el árbol del dibujo:</p>
+      <div class="tabla-scroll"><table class="datos texto">
+        <thead><tr><th>Recorrido</th><th>Regla</th><th>Resultado</th></tr></thead>
+        <tbody>
+          <tr><td>Preorden</td><td>raíz → izquierda → derecha</td><td><b>50, 30, 20, 40, 70, 60, 80</b></td></tr>
+          <tr><td>Inorden</td><td>izquierda → raíz → derecha</td><td><b>20, 30, 40, 50, 60, 70, 80</b></td></tr>
+          <tr><td>Postorden</td><td>izquierda → derecha → raíz</td><td><b>20, 40, 30, 60, 80, 70, 50</b></td></tr>
+          <tr><td>Por niveles</td><td>piso por piso, de izquierda a derecha</td><td><b>50, 30, 70, 20, 40, 60, 80</b></td></tr>
+        </tbody>
+      </table></div>
+      <div class="avisos-fila">
+        <div class="aviso-c c-clave"><span class="material-symbols-rounded">check_circle</span><div><b>Truco</b><p>El <b>inorden</b> de un árbol de búsqueda siempre sale ordenado de menor a mayor.</p></div></div>
+        <div class="aviso-c c-info"><span class="material-symbols-rounded">build</span><div><b>Reconstruir</b><p>Con el inorden y el preorden (o el postorden) se recupera el árbol: la raíz es el primero del preorden (o el último del postorden) y el inorden dice qué va a cada lado.</p></div></div>
+        <div class="aviso-c c-especial"><span class="material-symbols-rounded">speed</span><div><b>¿Por qué es rápido?</b><p>Cada comparación descarta un lado. En un árbol equilibrado de 1000 nodos se encuentra cualquier valor en unas 10 comparaciones: O(log n).</p></div></div>
+      </div>
+      <div class="quiz" data-quiz="arboles"></div>
+    </details>
+
+    <div class="tarjeta" id="t-escena">
+      <div class="fila-controles" id="t-acciones">
+        <label class="campo" style="width:200px"><span>Valor</span><input type="text" id="t-valor" inputmode="decimal" placeholder="Ej.: 45  o  45, 12, 80" autocomplete="off"></label>
+        <button type="button" class="btn lleno" id="t-insertar"><span class="material-symbols-rounded">add</span>Insertar</button>
+        <button type="button" class="btn tonal" id="t-buscar"><span class="material-symbols-rounded">search</span>Buscar</button>
+        <button type="button" class="btn tonal" id="t-eliminar"><span class="material-symbols-rounded">delete</span>Eliminar</button>
+      </div>
+      <div class="fila-controles" id="t-extras">
+        <button type="button" class="btn tonal" id="t-aleatorios"><span class="material-symbols-rounded">casino</span>Aleatorios</button>
+        <button type="button" class="btn tonal" id="t-ejemplo"><span class="material-symbols-rounded">lightbulb</span>Ejemplo</button>
+        <button type="button" class="btn tonal" id="t-limpiar"><span class="material-symbols-rounded">delete_sweep</span>Limpiar</button>
+      </div>
+      <div class="aviso-c c-especial" id="t-nobst" hidden><span class="material-symbols-rounded">info</span><div><b>Este árbol no es de búsqueda</b><p>Se reconstruyó desde recorridos y no cumple la regla de menores a la izquierda. Puedes ver sus recorridos; para insertar, buscar o eliminar, usa «Ejemplo» o «Limpiar» y empieza uno nuevo.</p></div></div>
+      <div class="leyenda-c">
+        <span><i class="sw sw-ambar"></i>Revisando</span>
+        <span><i class="sw sw-azul"></i>Camino</span>
+        <span><i class="sw sw-verde"></i>Encontrado o insertado</span>
+        <span><i class="sw sw-verde-s"></i>Ya visitado</span>
+        <span><i class="sw sw-rojo"></i>Se elimina</span>
+      </div>
+      <div class="arbol-lienzo" id="t-lienzo"></div>
+      <div id="t-repro"></div>
+      <div class="narracion" id="t-narracion"></div>
+      <div class="chips" id="t-stats"></div>
+      <div class="acciones separadas">
+        <span class="espacio"></span>
+        <button type="button" class="btn contorno" id="t-png"><span class="material-symbols-rounded">image</span>PNG</button>
+        <button type="button" class="btn contorno" id="t-guardar"><span class="material-symbols-rounded">download</span>Guardar</button>
+        <button type="button" class="btn contorno" id="t-abrir"><span class="material-symbols-rounded">folder_open</span>Abrir</button>
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Recorridos</h2>
+      <p class="ayuda" style="margin-top:6px"><span class="material-symbols-rounded">info</span><span>Presiona «Animar» para ver en qué orden se visita cada nodo. Los valores se pintan de <b style="color:var(--verde-t)">verde</b> a medida que se anotan.</span></p>
+      <div class="recorridos" id="t-recorridos"></div>
+    </div>
+
+    <div class="tarjeta" id="t-recon">
+      <h2>Reconstruir un árbol</h2>
+      <p class="lead">Escribe el inorden y otro recorrido del mismo árbol (preorden o postorden) y la página lo arma, explicando cada paso.</p>
+      <div class="fila-controles" style="margin-top:14px">
+        <div class="campo-seg">
+          <span>Usar junto al inorden</span>
+          <div class="segmentado" id="t-tipo-recon">
+            <button type="button" data-valor="pre">Preorden</button>
+            <button type="button" data-valor="post">Postorden</button>
+          </div>
+        </div>
+      </div>
+      <div class="fila-controles">
+        <label class="campo ancho"><span>Inorden</span><input type="text" id="t-ino" placeholder="Ej.: 4, 2, 5, 1, 6, 3, 7" autocomplete="off"></label>
+        <label class="campo ancho"><span id="t-otro-etq">Preorden</span><input type="text" id="t-otro" placeholder="Ej.: 1, 2, 4, 5, 3, 6, 7" autocomplete="off"></label>
+      </div>
+      <div class="acciones" style="margin-top:4px">
+        <button type="button" class="btn lleno" id="t-reconstruir"><span class="material-symbols-rounded">build</span>Construir</button>
+        <button type="button" class="btn tonal" id="t-ejemplo-recon"><span class="material-symbols-rounded">lightbulb</span>Ejemplo</button>
+      </div>
+      <div id="t-recon-res"></div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="pie">
@@ -627,11 +1098,17 @@
 
 <script src="js/utilidades.js"></script>
 <script src="js/algoritmos.js"></script>
+<script src="js/pasos.js"></script>
+<script src="js/guia.js"></script>
+<script src="js/guias-contenido.js"></script>
 <script src="js/editor.js"></script>
 <script src="js/introduccion.js"></script>
 <script src="js/grafos.js"></script>
 <script src="js/asignacion.js"></script>
 <script src="js/johnson.js"></script>
+<script src="js/northwest.js"></script>
+<script src="js/sort.js"></script>
+<script src="js/arbol.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

@@ -53,6 +53,9 @@ const Johnson = (() => {
   }
 
   function obsoleto() {
+    const an = $('#j-anim');
+    if (an) an.hidden = true;
+    if (animRep) animRep.pausar();
     if (!solucion) return;
     solucion = null;
     $('#j-resultado').classList.add('obsoleto');
@@ -208,8 +211,84 @@ const Johnson = (() => {
     const id = k => mapa[r.act[k]];
     const aristas = r.actividades.filter(a => a.critica).map(a => [id(a.i), id(a.j)]).filter(([x, y]) => x != null && y != null);
     const etiquetas = {};
-    r.nodos.forEach(x => { const k = id(x.i); if (k != null) etiquetas[k] = `${F(x.te)} | ${F(x.tl)}`; });
-    ed.resaltar({ aristas, etiquetas });
+    const nodos = {};
+    r.nodos.forEach(x => { const k = id(x.i); if (k != null) { etiquetas[k] = `${F(x.te)} | ${F(x.tl)}`; if (x.critico) nodos[k] = 'ruta'; } });
+    ed.resaltar({ aristas, etiquetas, nodos, color: 'rojo' });
+  }
+
+  function framesAnimacion(r) {
+    const id = k => mapa[r.act[k]];
+    const lista = [];
+    const te = r.te, tl = r.tl, max = r.objetivo === 'max';
+    const ent = j => {
+      const c = {};
+      r.pred[j].forEach(i => { if (id(i) != null && id(j) != null) c[`${id(i)}>${id(j)}`] = 'azul'; });
+      return c;
+    };
+    const sal = i => {
+      const c = {};
+      r.suc[i].forEach(j => { if (id(i) != null && id(j) != null) c[`${id(i)}>${id(j)}`] = 'azul'; });
+      return c;
+    };
+    lista.push({ nodos: {}, clases: {}, etiquetas: {}, texto: `Primero viene la <b>ida</b>: se calcula el tiempo más temprano (TE) de cada evento, de izquierda a derecha. El nodo inicial empieza en 0.` });
+    const hechos = [];
+    r.orden.forEach((j, s) => {
+      const nodos = {}, etiquetas = {};
+      hechos.forEach(x => { nodos[id(x)] = 'hecho'; etiquetas[id(x)] = `TE ${F(te[x])}`; });
+      nodos[id(j)] = 'actual';
+      etiquetas[id(j)] = `TE ${F(te[j])}`;
+      const llega = r.pred[j].length;
+      const texto = (llega > 1 ? `A ${U.esc(r.nodos[j].nombre)} llegan ${llega} flechas (en azul): se toma el ${max ? 'mayor' : 'menor'} valor. ` : '') + `<code>${U.esc(r.ida[s])}</code>`;
+      lista.push({ nodos, clases: ent(j), etiquetas, texto });
+      hechos.push(j);
+    });
+    const todosTE = {};
+    r.orden.forEach(x => { todosTE[id(x)] = `TE ${F(te[x])}`; });
+    lista.push({ nodos: Object.fromEntries(r.orden.map(x => [id(x), 'hecho'])), clases: {}, etiquetas: { ...todosTE }, texto: `Ida terminada: ${max ? 'el proyecto dura' : 'el camino más corto mide'} <b>${F(r.valor)}</b>. Ahora la <b>vuelta</b>: el tiempo más tardío (TL) de cada evento, de derecha a izquierda.` });
+    const vuelta = r.orden.slice().reverse();
+    const listos = [];
+    vuelta.forEach((i, s) => {
+      const nodos = {}, etiquetas = { ...todosTE };
+      listos.forEach(x => { nodos[id(x)] = 'hecho'; etiquetas[id(x)] = `${F(te[x])} | ${F(tl[x])}`; });
+      nodos[id(i)] = 'actual';
+      etiquetas[id(i)] = `${F(te[i])} | ${F(tl[i])}`;
+      const salen = r.suc[i].length;
+      const texto = (salen > 1 ? `De ${U.esc(r.nodos[i].nombre)} salen ${salen} flechas (en azul): se toma el ${max ? 'menor' : 'mayor'} valor. ` : '') + `<code>${U.esc(r.vuelta[s])}</code>`;
+      lista.push({ nodos, clases: sal(i), etiquetas, texto });
+      listos.push(i);
+    });
+    const aristas = r.actividades.filter(a => a.critica).map(a => [id(a.i), id(a.j)]);
+    const nodosF = {}, etiquetasF = {};
+    r.nodos.forEach(x => { etiquetasF[id(x.i)] = `${F(x.te)} | ${F(x.tl)}`; if (x.critico) nodosF[id(x.i)] = 'ruta'; });
+    lista.push({ aristas, color: 'rojo', nodos: nodosF, clases: {}, etiquetas: etiquetasF, fin: true, texto: `Donde TE = TL la holgura es 0. Esas actividades forman la <b style="color:var(--rojo-t)">${max ? 'ruta crítica' : 'ruta mínima'}</b> (en rojo): ${r.rutas.map(x => x.nodos.map(U.esc).join(' → ')).join(' y ')}.` });
+    return lista;
+  }
+
+  let animFrames = [];
+  let animRep = null;
+
+  function mostrarAnim(k) {
+    const f = animFrames[k];
+    ed.resaltar({ aristas: f.aristas || [], color: f.color, clases: f.clases, nodos: f.nodos, etiquetas: f.etiquetas });
+    const n = $('#j-narr');
+    n.classList.toggle('fin', !!f.fin);
+    n.innerHTML = `<span class="material-symbols-rounded">${f.fin ? 'check_circle' : 'record_voice_over'}</span><span>${f.texto}</span>`;
+  }
+
+  function animar() {
+    if (!solucion) return;
+    if (J.modo !== 'grafo' || !mapa) {
+      if (!grafoDeMatriz()) return;
+      J.modo = 'grafo';
+      sincronizar();
+      guardarLocal();
+      ed.mostrar();
+    }
+    animFrames = framesAnimacion(solucion);
+    $('#j-anim').hidden = false;
+    if (!animRep) animRep = Reproductor.crear($('#j-repro'), { alMostrar: mostrarAnim, velocidad: 2 });
+    animRep.cargar(animFrames.length, 0, true);
+    $('#j-panel-grafo').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function verEnGrafo() {
@@ -254,7 +333,7 @@ const Johnson = (() => {
 
   function htmlResultado(r) {
     const max = r.objetivo === 'max';
-    const rutas = r.rutas.map(x => `<span class="chip negro">${x.nodos.map(U.esc).join(' → ')} <b>${F(x.valor)}</b></span>`).join('');
+    const rutas = r.rutas.map(x => `<span class="chip rojo">${x.nodos.map(U.esc).join(' → ')} <b>${F(x.valor)}</b></span>`).join('');
     const holgadas = r.actividades.filter(a => !a.critica);
     const ejemploH = holgadas.length ? holgadas[0] : null;
     let explicacion = max
@@ -265,13 +344,13 @@ const Johnson = (() => {
       <tr class="${x.critico ? 'critica' : ''}">
         <td><span class="etq-chip">${U.esc(x.nombre)}</span></td>
         <td>${F(x.te)}</td><td>${F(x.tl)}</td><td>${F(x.h)}</td>
-        <td>${x.critico ? '<span class="insignia">crítico</span>' : ''}</td>
+        <td>${x.critico ? '<span class="insignia rojo">crítico</span>' : ''}</td>
       </tr>`).join('');
     const filasAct = r.actividades.map(a => `
       <tr class="${a.critica ? 'critica' : ''}">
         <td>${U.esc(a.de)} → ${U.esc(a.a)}</td>
         <td>${F(a.w)}</td><td>${F(a.te)}</td><td>${F(a.tl)}</td><td>${F(a.h)}</td>
-        <td>${a.critica ? '<span class="insignia">crítica</span>' : ''}</td>
+        <td>${a.critica ? '<span class="insignia rojo">crítica</span>' : ''}</td>
       </tr>`).join('');
     return `
       <div class="tarjeta">
@@ -286,8 +365,11 @@ const Johnson = (() => {
         ${r.omitidos.length ? `<p class="nota"><span class="material-symbols-rounded">info</span><span>Se ignoraron los nodos sin conexiones: ${U.esc(Algoritmos.lista(r.omitidos))}.</span></p>` : ''}
         <h3>${r.rutas.length > 1 ? (max ? 'Rutas críticas' : 'Rutas mínimas') : (max ? 'Ruta crítica' : 'Ruta mínima')}</h3>
         <div class="chips">${rutas}</div>
-        <p class="ayuda"><span class="material-symbols-rounded">info</span><span>${J.modo === 'grafo' ? 'En la red, las flechas en negro son la ruta y debajo de cada nodo aparece <b>TE | TL</b>.' : 'Puedes ver estos resultados dibujados sobre la red.'}</span></p>
-        ${J.modo === 'matriz' ? '<div class="acciones"><button type="button" class="btn contorno" data-accion="ver-grafo"><span class="material-symbols-rounded">hub</span>Ver en la red</button></div>' : ''}
+        <p class="ayuda"><span class="material-symbols-rounded">info</span><span>${J.modo === 'grafo' ? 'En la red, las flechas en rojo son la ruta y debajo de cada nodo aparece <b>TE | TL</b>.' : 'Puedes ver estos resultados dibujados sobre la red.'}</span></p>
+        <div class="acciones">
+          <button type="button" class="btn lleno" data-accion="animar"><span class="material-symbols-rounded">play_circle</span>Ver animación de ida y vuelta</button>
+          ${J.modo === 'matriz' ? '<button type="button" class="btn contorno" data-accion="ver-grafo"><span class="material-symbols-rounded">hub</span>Ver en la red</button>' : ''}
+        </div>
         <h3>Nodos (eventos)</h3>
         <p class="ayuda"><span class="material-symbols-rounded">info</span><span>TE: lo más temprano que puede ocurrir el evento · TL: lo más tarde que puede ocurrir sin retrasar el final · Holgura: ${max ? 'TL − TE' : 'TE − TL'}</span></p>
         <div class="tabla-scroll"><table class="datos">
@@ -423,6 +505,7 @@ const Johnson = (() => {
     $('#j-abrir').addEventListener('click', () => App.abrirArchivo());
     $('#j-resultado').addEventListener('click', e => {
       if (e.target.closest('[data-accion="ver-grafo"]')) verEnGrafo();
+      if (e.target.closest('[data-accion="animar"]')) animar();
     });
 
     const t = $('#j-tabla');

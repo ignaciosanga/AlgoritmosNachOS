@@ -252,7 +252,9 @@ const Asignacion = (() => {
       .filter(a => !a.ficticia)
       .map(a => [mapa.f[a.oi], mapa.c[a.oj]])
       .filter(([x, y]) => x != null && y != null);
-    ed.resaltar({ aristas });
+    const nodos = {};
+    aristas.forEach(([x, y]) => { nodos[x] = 'asig'; nodos[y] = 'asig'; });
+    ed.resaltar({ aristas, nodos, color: 'verde' });
   }
 
   function verEnGrafo() {
@@ -325,8 +327,8 @@ const Asignacion = (() => {
     const max = r.objetivo === 'max';
     const reales = r.asignaciones.filter(a => !a.ficticia && Number.isFinite(a.valor));
     const chips = r.asignaciones.map(a => a.ficticia
-      ? `<span class="chip">${U.esc(a.fila)} → ${U.esc(a.col)} <b>${a.oi >= 0 ? 'sin tarea' : 'nadie la hace'}</b></span>`
-      : `<span class="chip ${Number.isFinite(a.valor) ? 'negro' : ''}">${U.esc(a.fila)} → ${U.esc(a.col)} <b>${F(a.valor)}</b></span>`).join('');
+      ? `<span class="chip violeta">${U.esc(a.fila)} → ${U.esc(a.col)} <b>${a.oi >= 0 ? 'sin tarea' : 'nadie la hace'}</b></span>`
+      : `<span class="chip ${Number.isFinite(a.valor) ? 'verde' : ''}">${U.esc(a.fila)} → ${U.esc(a.col)} <b>${F(a.valor)}</b></span>`).join('');
     const sinTarea = r.asignaciones.filter(a => a.ficticia && a.oi >= 0).map(a => a.fila);
     const sinAgente = r.asignaciones.filter(a => a.ficticia && a.oj >= 0).map(a => a.col);
     let explicacion = `Cada fila recibe una columna distinta. ${max ? 'Beneficio' : 'Costo'} total: ${reales.map(a => F(a.valor)).join(' + ') || '0'} = <b>${F(r.total)}</b>.`;

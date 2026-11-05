@@ -7,6 +7,9 @@ const Editor = (() => {
   const r1 = v => Math.round(v * 10) / 10;
   const limitar = (v, a, b) => Math.min(b, Math.max(a, v));
   const clave = (de, a) => de + '>' + a;
+  const COLORES = { negro: '#111111', gris: '#c4c4c4', base: '#2b2b2b', rojo: '#dc2626', verde: '#16a34a', azul: '#2563eb', ambar: '#d97706', violeta: '#7c3aed' };
+  const SUAVES = { rojo: '#fce7e7', verde: '#e3f4e8', azul: '#e8effd', ambar: '#fdf0dc', violeta: '#efe7fd' };
+  const CLASE_NODO = { actual: 'ambar', hecho: 'azul', ruta: 'rojo', asig: 'verde', especial: 'violeta' };
   let contador = 0;
 
   const herramientas = [
@@ -49,9 +52,7 @@ const Editor = (() => {
       <div class="lienzo">
         <svg xmlns="${NS}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Lienzo del grafo">
           <defs>
-            <marker id="${pre}-f" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0.8 L10 5 L0 9.2 Z" fill="#2b2b2b"/></marker>
-            <marker id="${pre}-fn" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="13" markerHeight="13" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0.8 L10 5 L0 9.2 Z" fill="#000000"/></marker>
-            <marker id="${pre}-fg" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="11" markerHeight="11" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0.8 L10 5 L0 9.2 Z" fill="#c4c4c4"/></marker>
+            ${Object.entries(COLORES).map(([nombre, c]) => `<marker id="${pre}-m-${nombre}" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="${nombre === 'base' || nombre === 'gris' ? 11 : 13}" markerHeight="${nombre === 'base' || nombre === 'gris' ? 11 : 13}" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0.8 L10 5 L0 9.2 Z" fill="${c}"/></marker>`).join('')}
             <filter id="${pre}-s" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.2"/></filter>
           </defs>
           <g class="capa"></g>
@@ -240,9 +241,11 @@ const Editor = (() => {
         const A = porId.get(a.de), B = porId.get(a.a);
         if (!A || !B) return;
         const k = clave(a.de, a.a);
-        const on = hay && resaltado.aristas.has(k);
-        const color = hay ? (on ? '#000000' : '#c4c4c4') : '#2b2b2b';
-        const marca = hay ? (on ? `${pre}-fn` : `${pre}-fg`) : `${pre}-f`;
+        const claseA = hay ? (resaltado.clases[k] || (resaltado.aristas.has(k) ? resaltado.color : null)) : null;
+        const on = !!claseA;
+        const nombreColor = hay ? (claseA || 'gris') : 'base';
+        const color = COLORES[nombreColor];
+        const marca = `${pre}-m-${nombreColor}`;
         const geo = geometria(A, B, a.de === a.a, a.de !== a.a && G.aristas.some(x => x.de === a.a && x.a === a.de));
         h += `<g data-arista="${k}" class="arista"><path d="${geo.d}" fill="none" stroke="transparent" stroke-width="18"/><path d="${geo.d}" fill="none" stroke="${color}" stroke-width="${on ? 3.5 : 2}" stroke-linecap="round" marker-end="url(#${marca})"/></g>`;
         const txt = F(a.peso);
@@ -253,14 +256,17 @@ const Editor = (() => {
           [geo.lx, geo.ly] = geo.en(t);
         }
         puestas.push({ x: geo.lx, y: geo.ly, w });
-        etiquetas += `<g data-arista="${k}" class="arista"><rect x="${r1(geo.lx - w / 2)}" y="${r1(geo.ly - 11)}" width="${r1(w)}" height="22" rx="11" fill="${on ? '#000000' : '#ffffff'}" stroke="${on ? '#000000' : '#d6d6d6'}" stroke-width="1.2"/><text pointer-events="none" x="${r1(geo.lx)}" y="${r1(geo.ly + 4.5)}" text-anchor="middle" font-family="${FUENTE}" font-size="12.5" font-weight="600" fill="${on ? '#ffffff' : (hay ? '#8a8a8a' : '#111111')}">${U.esc(txt)}</text></g>`;
+        etiquetas += `<g data-arista="${k}" class="arista"><rect x="${r1(geo.lx - w / 2)}" y="${r1(geo.ly - 11)}" width="${r1(w)}" height="22" rx="11" fill="${on ? color : '#ffffff'}" stroke="${on ? color : '#d6d6d6'}" stroke-width="1.2"/><text pointer-events="none" x="${r1(geo.lx)}" y="${r1(geo.ly + 4.5)}" text-anchor="middle" font-family="${FUENTE}" font-size="12.5" font-weight="600" fill="${on ? '#ffffff' : (hay ? '#8a8a8a' : '#111111')}">${U.esc(txt)}</text></g>`;
       });
 
       G.nodos.forEach(n => {
         const sel = origen === n.id;
+        const cn = hay && resaltado.nodos[n.id] ? CLASE_NODO[resaltado.nodos[n.id]] || resaltado.nodos[n.id] : null;
+        const relleno = sel ? '#111111' : (cn ? SUAVES[cn] : '#ffffff');
+        const trazo = cn ? COLORES[cn] : '#111111';
         const nombre = n.nombre.length > 5 ? n.nombre.slice(0, 4) + '…' : n.nombre;
         const fs = nombre.length > 3 ? 12 : 15;
-        h += `<g data-nodo="${n.id}" class="nodo"><title>${U.esc(n.nombre)}</title><circle cx="${r1(n.x)}" cy="${r1(n.y)}" r="${R}" fill="${sel ? '#111111' : '#ffffff'}" stroke="#111111" stroke-width="2" filter="url(#${pre}-s)"/><text pointer-events="none" x="${r1(n.x)}" y="${r1(n.y + fs * 0.35)}" text-anchor="middle" font-family="${FUENTE}" font-size="${fs}" font-weight="700" fill="${sel ? '#ffffff' : '#111111'}">${U.esc(nombre)}</text>`;
+        h += `<g data-nodo="${n.id}" class="nodo"><title>${U.esc(n.nombre)}</title><circle cx="${r1(n.x)}" cy="${r1(n.y)}" r="${R}" fill="${relleno}" stroke="${trazo}" stroke-width="${cn ? 3.5 : 2}" filter="url(#${pre}-s)"/><text pointer-events="none" x="${r1(n.x)}" y="${r1(n.y + fs * 0.35)}" text-anchor="middle" font-family="${FUENTE}" font-size="${fs}" font-weight="700" fill="${sel ? '#ffffff' : '#111111'}">${U.esc(nombre)}</text>`;
         let y = n.y + R + 16;
         if (verCard) {
           const g = grados.get(n.id);
@@ -270,7 +276,7 @@ const Editor = (() => {
         if (hay && resaltado.etiquetas && resaltado.etiquetas[n.id] != null) {
           const t = resaltado.etiquetas[n.id];
           const w = 14 + t.length * 6.6;
-          h += `<rect x="${r1(n.x - w / 2)}" y="${r1(y - 12)}" width="${r1(w)}" height="18" rx="9" fill="#111111"/><text pointer-events="none" x="${r1(n.x)}" y="${r1(y + 1)}" text-anchor="middle" font-family="${FUENTE}" font-size="11" font-weight="600" fill="#ffffff">${U.esc(t)}</text>`;
+          h += `<rect x="${r1(n.x - w / 2)}" y="${r1(y - 12)}" width="${r1(w)}" height="18" rx="9" fill="${cn ? COLORES[cn] : '#111111'}"/><text pointer-events="none" x="${r1(n.x)}" y="${r1(y + 1)}" text-anchor="middle" font-family="${FUENTE}" font-size="11" font-weight="600" fill="#ffffff">${U.esc(t)}</text>`;
         }
         h += '</g>';
       });
@@ -581,6 +587,9 @@ const Editor = (() => {
     function resaltar(r) {
       resaltado = {
         aristas: new Set((r.aristas || []).map(([de, a]) => clave(de, a))),
+        color: r.color || 'negro',
+        clases: r.clases || {},
+        nodos: r.nodos || {},
         etiquetas: r.etiquetas || null
       };
       dibujar();
