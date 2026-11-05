@@ -431,6 +431,22 @@ const Editor = (() => {
       cambio();
     }
 
+    function buscarCamino(desde, hasta) {
+      const prev = new Map([[desde, null]]);
+      const cola = [desde];
+      while (cola.length) {
+        const x = cola.shift();
+        if (x === hasta) break;
+        G.aristas.forEach(e => {
+          if (e.de === x && e.a !== e.de && !prev.has(e.a)) { prev.set(e.a, x); cola.push(e.a); }
+        });
+      }
+      if (!prev.has(hasta)) return null;
+      const camino = [];
+      for (let x = hasta; x !== null; x = prev.get(x)) camino.unshift(x);
+      return camino;
+    }
+
     async function conectar(id) {
       if (origen === null) {
         origen = id;
@@ -449,6 +465,21 @@ const Editor = (() => {
       const A = nodo(de), B = nodo(a);
       const existente = G.aristas.find(x => x.de === de && x.a === a);
       const inversa = de !== a && G.aristas.find(x => x.de === a && x.a === de);
+      if (op.aciclico && !existente && de !== a) {
+        const camino = buscarCamino(a, de);
+        if (camino) {
+          const nombres = camino.map(id => nodo(id).nombre);
+          await U.dialogo({
+            titulo: inversa ? 'No se permite ida y vuelta' : 'Esta conexión formaría un ciclo',
+            texto: inversa
+              ? `Ya existe ${B.nombre} → ${A.nombre}. ${op.avisoIdaVuelta || 'Aquí no se permiten conexiones de ida y vuelta entre dos nodos.'}`
+              : `Ya se puede ir de ${B.nombre} a ${A.nombre} (${nombres.join(' → ')}). Si agregas ${A.nombre} → ${B.nombre}, se forma el ciclo ${[A.nombre, ...nombres].join(' → ')}. ${op.avisoCiclo || 'Aquí no se permiten ciclos.'}`,
+            aceptar: 'Entendido',
+            cancelar: 'Cerrar'
+          });
+          return;
+        }
+      }
       const campos = [{ id: 'peso', etiqueta: op.etiquetaPeso || 'Peso', tipo: 'number', valor: existente ? F(existente.peso) : '1' }];
       if (de !== a && !inversa && !existente && op.idaVuelta !== false) {
         campos.push({ id: 'doble', etiqueta: `Crear también ${B.nombre} → ${A.nombre} (ida y vuelta)`, tipo: 'checkbox', valor: false });

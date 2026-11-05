@@ -160,7 +160,10 @@ const Grafos = (() => {
       : `Matriz de ${f} × ${c}: no es cuadrada, así que al resolver se ${Math.abs(f - c) === 1 ? 'agrega una' : 'agregan ' + Math.abs(f - c)} ${f < c ? (Math.abs(f - c) === 1 ? 'fila ficticia' : 'filas ficticias') : (Math.abs(f - c) === 1 ? 'columna ficticia' : 'columnas ficticias')}.`;
     if (bucles) asig.texto += ` ${bucles === 1 ? 'El bucle no se usa' : 'Los bucles no se usan'}.`;
     const ciclo = buscarCiclo(g);
-    if (ciclo) {
+    const doble = ar.find(a => ar.some(b => b.de === a.a && b.a === a.de));
+    if (doble) {
+      joh.texto = `Hay una conexión de ida y vuelta (${nombre.get(doble.de)} → ${nombre.get(doble.a)} y ${nombre.get(doble.a)} → ${nombre.get(doble.de)}). Johnson no la permite: es un ciclo y las actividades siempre deben avanzar.`;
+    } else if (ciclo) {
       joh.texto = `Hay un ciclo (${ciclo.map(id => nombre.get(id)).join(' → ')}). Johnson necesita una red donde las flechas siempre avancen.`;
     } else {
       joh.ok = true;

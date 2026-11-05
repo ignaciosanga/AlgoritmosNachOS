@@ -2,6 +2,7 @@ const Johnson = (() => {
   const MAX = 20;
   const F = v => Algoritmos.fmt(v);
   const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
   let J = null;
   let ed = null;
   let solucion = null;
@@ -67,12 +68,63 @@ const Johnson = (() => {
     p.innerHTML = texto ? `<span class="material-symbols-rounded">tips_and_updates</span><span>${texto}</span>` : '';
   }
 
+  function buscarCicloEn(n, hay) {
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+      if (hay(i, j) && hay(j, i)) return { doble: true, ruta: [i, j, i] };
+    }
+    const estado = new Array(n).fill(0), pila = [];
+    let ruta = null;
+    const visitar = i => {
+      estado[i] = 1;
+      pila.push(i);
+      for (let j = 0; j < n && !ruta; j++) {
+        if (i === j || !hay(i, j)) continue;
+        if (estado[j] === 1) ruta = pila.slice(pila.indexOf(j)).concat(j);
+        else if (!estado[j]) visitar(j);
+      }
+      pila.pop();
+      estado[i] = 2;
+    };
+    for (let i = 0; i < n && !ruta; i++) if (!estado[i]) visitar(i);
+    return ruta ? { doble: false, ruta } : null;
+  }
+
+  function revisarCiclos() {
+    const caja = $('#j-ciclo');
+    if (!caja) return;
+    $$('#j-tabla .celda.conflicto').forEach(c => c.classList.remove('conflicto'));
+    let c = null, nombres = [];
+    if (J.modo === 'matriz') {
+      nombres = J.nombres;
+      c = buscarCicloEn(nombres.length, (i, j) => String(J.valores[i][j] ?? '').trim() !== '');
+      if (c) {
+        for (let k = 0; k + 1 < c.ruta.length; k++) {
+          const celda = $(`#j-tabla .celda[data-i="${c.ruta[k]}"][data-j="${c.ruta[k + 1]}"]`);
+          if (celda) celda.classList.add('conflicto');
+        }
+      }
+    } else if (ed) {
+      const g = ed.obtener();
+      const pos = new Map(g.nodos.map((x, i) => [x.id, i]));
+      nombres = g.nodos.map(x => x.nombre);
+      const M = new Set(g.aristas.filter(a => a.de !== a.a).map(a => pos.get(a.de) + '>' + pos.get(a.a)));
+      c = buscarCicloEn(g.nodos.length, (i, j) => M.has(i + '>' + j));
+    }
+    caja.hidden = !c;
+    if (!c) { caja.innerHTML = ''; return; }
+    const nm = c.ruta.map(i => U.esc(nombres[i]));
+    caja.innerHTML = c.doble
+      ? `<span class="material-symbols-rounded">sync_problem</span><div><b>Conexión de ida y vuelta: no se permite</b><p>Hay una actividad de <b>${nm[0]} → ${nm[1]}</b> y otra de <b>${nm[1]} → ${nm[0]}</b>. Eso forma un ciclo, y en Johnson las actividades siempre avanzan en el tiempo. Deja solo la que va hacia adelante${J.modo === 'matriz' ? ' (las dos celdas están marcadas en rojo)' : ''}.</p></div>`
+      : `<span class="material-symbols-rounded">sync_problem</span><div><b>La red tiene un ciclo</b><p>El camino <b>${nm.join(' → ')}</b> vuelve a un evento por el que ya pasó. En Johnson las actividades siempre avanzan: quita una de esas conexiones${J.modo === 'matriz' ? ' (están marcadas en rojo)' : ''}.</p></div>`;
+  }
+
   function sincronizar() {
     U.marcar($('#j-modo'), J.modo);
     U.marcar($('#j-objetivo'), J.objetivo);
     $('#j-panel-matriz').hidden = J.modo !== 'matriz';
     $('#j-panel-grafo').hidden = J.modo !== 'grafo';
     $('#j-nodos').value = J.nombres.length;
+    revisarCiclos();
   }
 
   function dibujarTabla() {
@@ -89,6 +141,7 @@ const Johnson = (() => {
       h += '</tr>';
     });
     $('#j-tabla').innerHTML = h + '</tbody>';
+    revisarCiclos();
   }
 
   function dibujar() {
@@ -101,6 +154,7 @@ const Johnson = (() => {
     mapa = null;
     obsoleto();
     guardarLocal();
+    revisarCiclos();
   }
 
   function redimensionar() {
@@ -437,6 +491,7 @@ const Johnson = (() => {
       if (fuente === 'matriz') grafoDeMatriz();
       ed.mostrar();
     }
+    revisarCiclos();
     return true;
   }
 
@@ -455,6 +510,7 @@ const Johnson = (() => {
     $('#j-resultado').classList.remove('obsoleto');
     guardarLocal();
     ed.mostrar();
+    revisarCiclos();
     U.aviso('Red cargada desde Grafos');
   }
 
@@ -468,6 +524,10 @@ const Johnson = (() => {
       clave: 'grafolab.johnson.grafo',
       ejemplo: ejemploGrafo,
       bucles: false,
+      aciclico: true,
+      idaVuelta: false,
+      avisoIdaVuelta: 'En Johnson las actividades siempre avanzan en el tiempo: no puede haber una conexión de ida y vuelta entre dos eventos, porque eso es un ciclo. Si de verdad hay dos actividades, deja solo la que va hacia adelante.',
+      avisoCiclo: 'En Johnson las actividades siempre avanzan: la red no puede volver a un evento por el que ya pasó.',
       etiquetaPeso: 'Duración',
       nombrar: k => String(k + 1),
       avisoBucle: 'En Johnson un nodo no puede conectarse consigo mismo',
@@ -476,6 +536,7 @@ const Johnson = (() => {
         conectar: 'Toca el evento donde empieza la actividad y luego donde termina; el peso es la duración.'
       },
       alCambiar: () => {
+        revisarCiclos();
         if (sincronizando) return;
         fuente = 'grafo';
         mapa = null;
@@ -531,6 +592,7 @@ const Johnson = (() => {
     t.addEventListener('focusin', e => { if (e.target.classList.contains('celda')) e.target.select(); });
 
     dibujar();
+    revisarCiclos();
   }
 
   return {

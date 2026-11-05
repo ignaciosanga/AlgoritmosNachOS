@@ -685,7 +685,7 @@
       <h3>¿Por qué se toma el máximo en la ida?</h3>
       <p>Un evento solo ocurre cuando terminan <b>todas</b> las actividades que llegan a él. Si a un nodo llegan una actividad que termina en el día 8 y otra que termina en el día 9, el evento ocurre recién el día 9. Por eso, para la ruta crítica se <b>maximiza</b>. Si eliges <b>minimizar</b>, el mismo procedimiento con mínimos encuentra el camino más corto desde el inicio hasta el final.</p>
       <div class="avisos-fila">
-        <div class="aviso-c c-cuidado"><span class="material-symbols-rounded">warning</span><div><b>Reglas de la red</b><p>Las flechas siempre avanzan: no puede haber <b>bucles</b> (un nodo hacia sí mismo) ni <b>ciclos</b> (un camino que vuelve a un nodo por el que ya pasó).</p></div></div>
+        <div class="aviso-c c-cuidado"><span class="material-symbols-rounded">warning</span><div><b>Reglas de la red</b><p>Las flechas siempre avanzan: no puede haber <b>bucles</b> (un nodo hacia sí mismo), ni conexiones de <b>ida y vuelta</b> (por ejemplo 1 → 2 con duración 2 y 2 → 1 con duración 6), ni <b>ciclos</b> (un camino que vuelve a un nodo por el que ya pasó). Entre dos eventos solo puede haber una flecha, en un solo sentido.</p></div></div>
         <div class="aviso-c c-especial"><span class="material-symbols-rounded">play_circle</span><div><b>Míralo animado</b><p>Después de resolver, usa «Ver animación de ida y vuelta»: verás en la red cómo se calcula cada TE y cada TL, y la ruta crítica aparece en <b style="color:var(--rojo-t)">rojo</b>.</p></div></div>
       </div>
       <div class="videos-chicos">
@@ -738,6 +738,8 @@
         <p class="nota" id="j-nota" hidden></p>
         <div class="tabla-scroll"><table class="matriz" id="j-tabla"></table></div>
       </div>
+
+      <div class="aviso-c c-cuidado" id="j-ciclo" hidden></div>
 
       <div class="acciones separadas">
         <button type="button" class="btn lleno grande" id="j-resolver"><span class="material-symbols-rounded">play_arrow</span>Resolver</button>

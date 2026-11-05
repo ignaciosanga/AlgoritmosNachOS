@@ -56,7 +56,7 @@ Guia.registrar('grafos', {
   ],
   colores: [['negro', 'Nodo seleccionado como origen al conectar'], ['verde', 'Algoritmo disponible'], ['rojo', 'Algoritmo no disponible'], ['azul', 'Celda con conexión en la matriz binaria y en el ejemplo']],
   consejos: ['Entre dos nodos puede haber como máximo dos conexiones: una de ida y otra de vuelta. Al conectar, marca «ida y vuelta» para crear las dos a la vez.'],
-  cuidado: ['Johnson no acepta ciclos (por ejemplo A → B → A). Si aparece en rojo, borra una de las flechas del ciclo.'],
+  cuidado: ['Johnson no acepta ciclos ni conexiones de ida y vuelta (por ejemplo A → B y B → A). Si aparece en rojo, borra una de esas flechas.'],
   complejidad: 'Armar la matriz de adyacencia de V nodos es O(V²): 10 nodos son 100 celdas.',
   preguntas: [
     { p: 'En la matriz de adyacencia, ¿qué representa la celda (fila B, columna C)?', o: ['La conexión de C hacia B', 'La conexión de B hacia C', 'La suma de B y C', 'Cuántas veces aparece B'], c: 1, e: 'La fila es el origen y la columna el destino: (B, C) es la flecha que va de B a C.' },
@@ -125,12 +125,13 @@ Guia.registrar('johnson', {
   ],
   colores: [['rojo', 'Ruta crítica: holgura 0'], ['ambar', 'Evento que se está calculando'], ['azul', 'Flechas que se usan en el cálculo y eventos ya calculados'], ['verde', 'Fin de la animación']],
   consejos: ['En la ida se toma el máximo porque un evento solo ocurre cuando terminan todas las actividades que llegan a él.'],
-  cuidado: ['La red no puede tener ciclos ni bucles: las actividades siempre avanzan en el tiempo.'],
+  cuidado: ['La red no puede tener bucles (un nodo hacia sí mismo), conexiones de ida y vuelta (1 → 2 y 2 → 1) ni ciclos: las actividades siempre avanzan en el tiempo.', 'Si intentas dibujar una flecha que cierra un ciclo, la página no te deja y te explica por qué.'],
   complejidad: 'Johnson es O(V + E): recorre cada nodo (V) y cada actividad (E) una vez de ida y otra de vuelta.',
   preguntas: [
     { p: 'A un evento llegan dos actividades: una termina en el día 8 y otra en el día 11. ¿Cuál es su TE?', o: ['8', '11', '19', '3'], c: 1, e: 'El evento ocurre cuando terminan todas las que llegan, o sea, en el día 11 (el máximo).' },
     { p: 'Un evento tiene TE = 5 y TL = 9. ¿Cuál es su holgura?', o: ['14', '4', '0', '−4'], c: 1, e: 'Holgura = TL − TE = 9 − 5 = 4: puede retrasarse hasta 4 sin afectar el final.' },
-    { p: '¿Qué tienen en común las actividades de la ruta crítica?', o: ['Son las más cortas', 'Tienen holgura 0', 'Salen del mismo nodo', 'Tienen duración 1'], c: 1, e: 'No tienen margen: si cualquiera se retrasa, todo el proyecto se retrasa.' }
+    { p: '¿Qué tienen en común las actividades de la ruta crítica?', o: ['Son las más cortas', 'Tienen holgura 0', 'Salen del mismo nodo', 'Tienen duración 1'], c: 1, e: 'No tienen margen: si cualquiera se retrasa, todo el proyecto se retrasa.' },
+    { p: 'En una red tienes 1 → 2 con duración 2 y 2 → 1 con duración 6. ¿Se puede resolver con Johnson?', o: ['Sí, se usa la mayor', 'Sí, se usa la menor', 'No: ida y vuelta es un ciclo', 'Sí, se suman'], c: 2, e: 'Ir de 1 a 2 y volver de 2 a 1 es un ciclo. En Johnson el tiempo siempre avanza, así que entre dos eventos solo puede haber una flecha en un sentido.' }
   ]
 });
 

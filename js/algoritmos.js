@@ -212,6 +212,11 @@ const Algoritmos = (() => {
       }
     }
     if (!arcos) return { error: 'La red no tiene actividades. Agrega al menos una conexión con su duración.' };
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) {
+      if (W[i][j] !== null && W[j][i] !== null) {
+        return { error: `Johnson no permite conexiones de ida y vuelta: hay una actividad de ${nm(i)} → ${nm(j)} (duración ${fmt(W[i][j])}) y otra de ${nm(j)} → ${nm(i)} (duración ${fmt(W[j][i])}). Eso es un ciclo, y en una red de actividades el tiempo siempre avanza. Deja solo la que va hacia adelante.` };
+      }
+    }
 
     const grado = pred.map(p => p.length);
     const cola = [];
@@ -222,7 +227,15 @@ const Algoritmos = (() => {
       orden.push(i);
       for (const j of suc[i]) if (--grado[j] === 0) cola.push(j);
     }
-    if (orden.length < n) return { error: 'La red tiene un ciclo: un camino que vuelve a un nodo por el que ya pasó. Johnson necesita una red sin ciclos, donde las actividades siempre avancen.' };
+    if (orden.length < n) {
+      const resto = new Set([...Array(n).keys()].filter(i => !orden.includes(i)));
+      let x = [...resto][0];
+      const visto = [];
+      while (!visto.includes(x)) { visto.push(x); x = pred[x].find(p => resto.has(p)); }
+      const ciclo = visto.slice(visto.indexOf(x)).reverse();
+      ciclo.push(ciclo[0]);
+      return { error: `La red tiene un ciclo: ${ciclo.map(nm).join(' → ')}. Ese camino vuelve a un nodo por el que ya pasó. Johnson necesita una red sin ciclos, donde las actividades siempre avancen: quita una de esas conexiones.` };
+    }
 
     const te = new Array(n).fill(0), ida = [];
     for (const j of orden) {

@@ -123,6 +123,7 @@ table.matriz input.celda{width:62px;height:46px;border-radius:14px;border:1.5px 
 table.matriz input.celda::placeholder{color:#c2c2c2;opacity:1}
 table.matriz input.celda:placeholder-shown{background:#fbfbfb;border-style:dashed}
 table.matriz input.celda:hover{border-color:var(--tonal-2)}
+table.matriz input.celda.conflicto{border-color:var(--rojo);border-style:solid;background:var(--rojo-s);color:var(--rojo-t)}
 table.matriz input.celda:focus{border-color:var(--negro);border-style:solid;background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.1)}
 table.matriz input.etq{width:62px;height:36px;border-radius:12px;border:none;background:var(--negro);color:#fff;text-align:center;font:650 13px var(--fuente);outline:none;padding:0 4px}
 table.matriz input.etq:focus{box-shadow:0 0 0 3px rgba(0,0,0,.2)}
